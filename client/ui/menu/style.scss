@@ -1,0 +1,10 @@
+.menu_container{
+  position: absolute;
+  background: gold;
+  width: 200px;
+  .menu_button{
+    background-color: grey;
+    color: aliceblue;
+    cursor: pointer;
+  }
+}
