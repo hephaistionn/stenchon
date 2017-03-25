@@ -1,0 +1,34 @@
+.hp_container {
+  color: #d1472d;
+  background-color: #ffffff;
+  border: solid 10px;
+  position: absolute;
+  top: 400px;
+  width: 500px;
+  height: 60px;
+}
+
+.hp_value {
+  position: absolute;
+  top: 0;
+  height: 60px;
+  background-color: #0086B3;
+}
+
+.mob {
+  .hp_container {
+    right: 0;
+  }
+  .hp_value {
+    right: 0;
+  }
+}
+
+.player {
+  .hp_container {
+    left: 0;
+  }
+  .hp_value {
+    left: 0;
+  }
+}

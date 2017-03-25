@@ -28,7 +28,7 @@ module.exports = class Manager {
     }
 
     clear() {
-        for (let i = 0; i < this.mobs.length; i++) {
+        for(let i = 0; i < this.mobs.length; i++) {
             this.remove(this.mobs[i]);
         }
         this.remove(this.home);
@@ -37,7 +37,7 @@ module.exports = class Manager {
 
     loop(dt) {
         this.player.update(dt);
-        for (let i = 0; i < this.mobs.length; i++) {
+        for(let i = 0; i < this.mobs.length; i++) {
             this.mobs[i].update(dt);
         }
         this.spanwner();
@@ -45,10 +45,10 @@ module.exports = class Manager {
 
 
     spanwner() {
-        if (!this.mobs.length) {
+        if(!this.mobs.length) {
             const mobs = modelMobs.timeline[this.level];
             this.level++;
-            if (mobs.length) {
+            if(mobs.length) {
                 mobs.forEach(index => {
                     this.newMob(modelMobs.mobs[index]);
                 });
@@ -59,24 +59,23 @@ module.exports = class Manager {
     }
 
     newPlayer() {
-
-
         this.player = new Player(modelPlayer);
         this.player.onDestroy(()=> {
+            this.player.onRemoved();
             this.remove(this.player);
             this.lose();
         });
         this.player.onSelect((action)=> {
-            if (action.type === 'conviction') {
-                this.player.regeneration(action.damage);
+            if(action.type === 'conviction') {
+                this.player.regeneration(action);
             }
-            for (let i = 0; i < this.mobs.length; i++) {
+            for(let i = 0; i < this.mobs.length; i++) {
                 this.mobs[i].clickable(true);
             }
         });
         this.player.onAttack((damage, type, index)=> {
             this.mobs[index].hurted(damage, type);
-            for (let i = 0; i < this.mobs.length; i++) {
+            for(let i = 0; i < this.mobs.length; i++) {
                 this.mobs[i].clickable(false);
             }
         });
@@ -88,6 +87,7 @@ module.exports = class Manager {
         mob.onDestroy(()=> {
             const index = this.mobs.indexOf(mob);
             this.mobs.splice(index, 1);
+            mob.onRemoved();
             this.remove(mob);
             this.stopLoop();
         });
@@ -136,15 +136,15 @@ module.exports = class Manager {
     win() {
         this.stopLoop();
         const modal = new Modal(
-        'game is won',
-        'retry', ()=> {
-            this.remove(modal);
-            this.startGame();
-        }, 'back',
-        ()=> {
-            this.remove(modal);
-            this.goHome();
-        }
+            'game is won',
+            'retry', ()=> {
+                this.remove(modal);
+                this.startGame();
+            }, 'back',
+            ()=> {
+                this.remove(modal);
+                this.goHome();
+            }
         );
 
         this.add(modal);
@@ -153,12 +153,12 @@ module.exports = class Manager {
 
 
     add(componant) {
-        if (!componant) return;
+        if(!componant) return;
         this.dom.appendChild(componant.dom);
     }
 
     remove(componant) {
-        if (!componant) return;
+        if(!componant) return;
         this.dom.removeChild(componant.dom);
     }
 

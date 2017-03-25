@@ -1,8 +1,21 @@
-.mob_sprite_container {
+.mob {
   position: absolute;
-  top:300px;
+  top: 200px;
   right: 10px;
-  width: 100px;
-  height: 100px;
-  background: red;
+  width: 400px;
+  height: 400px;
+  transform: translate(0px, 0px);
+  transition: transform 120ms;
+  &.attack {
+    transform: translate(-400px, -200px);
+  }
+  .sprite {
+    position: absolute;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    width: 100%;
+    height: 100%;
+  }
+
 }

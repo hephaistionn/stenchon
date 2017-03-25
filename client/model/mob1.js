@@ -5,15 +5,22 @@ module.exports = {
     states: [
         {
             name: 'waiting',
-            url: '',
+            url: 'assets/fillon/fillon01.png',
             size: 100,
             rotation: 0,
             duration: 1000
         },
         {
             name: 'attacking',
-            url: '',
+            url: 'assets/fillon/fillon03.png',
             size: 110,
+            rotation: 10,
+            duration: 1000
+        },
+        {
+            name: 'attacking',
+            url: 'assets/fillon/fillon02.png',
+            size: 100,
             rotation: 10,
             duration: 1000
         }
@@ -21,7 +28,7 @@ module.exports = {
     actions: [
         {
             name: 'attack1',
-            type: 0,
+            type: 'personal',
             cost: 1,
             desc: 'populism attack',
             damage: 4,
@@ -39,5 +46,6 @@ module.exports = {
         personal: 1,
         populism: 1,
         hate: 1
-    }
+    },
+    hurted: 2
 };

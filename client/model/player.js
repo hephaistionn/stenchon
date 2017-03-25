@@ -5,35 +5,42 @@ module.exports = {
     states: [
         {
             name: 'waiting',
-            url: '',
+            url: 'assets/melenchon/melenchon08.png',
             size: 100,
             rotation: 0,
             duration: 1000
         },
         {
             name: 'focus',
-            url: '',
+            url: 'assets/melenchon/melenchon06.png',
             size: 100,
             rotation: 0,
             duration: 1000000
         },
         {
             name: 'attacking',
-            url: '',
+            url: 'assets/melenchon/melenchon01.png',
             size: 110,
             rotation: 10,
             duration: 1000
         },
         {
             name: 'meeting',
-            url: '',
+            url: 'assets/melenchon/melenchon01.png',
+            size: 100,
+            rotation: 10,
+            duration: 1000
+        },
+        {
+            name: 'meeting',
+            url: 'assets/melenchon/melenchon03.png',
             size: 110,
             rotation: 10,
             duration: 1000
         },
         {
             name: 'hearted',
-            url: '',
+            url: 'assets/melenchon/melenchon02.png',
             size: 100,
             rotation: -10,
             duration: 1000

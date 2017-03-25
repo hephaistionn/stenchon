@@ -25,7 +25,7 @@ module.exports = class Modal {
         button.onclick = cb1;
         container.appendChild(button);
 
-        if (buttonLabel2) {
+        if(buttonLabel2) {
             const button2 = document.createElement('div');
             button2.className = 'modal_button left ';
             button2.textContent = buttonLabel2;

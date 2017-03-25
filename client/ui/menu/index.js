@@ -8,6 +8,8 @@ module.exports = class Menu {
         this.container.className = 'menu_container';
         this.dom.appendChild(this.container);
 
+        this.opened = false;
+
         model.actions.forEach(action => {
             const button = document.createElement('div');
             button.className = 'menu_button';
@@ -17,29 +19,20 @@ module.exports = class Menu {
             };
             this.container.appendChild(button);
         });
-
-        this.atb = document.createElement('div');
-        this.atb.className = 'menu_atb';
-        this.dom.appendChild(this.atb);
-
-        this.progress = document.createElement('div');
-        this.progress.className = 'menu_atb_progress';
-        this.atb.appendChild(this.progress);
-
-        this.ready = false;
     }
 
-    updateAtb(value) {
-        this.progress.style.width = value * 100 + '%';
-    }
-
-    updateAtbStatus(ready) {
-        if (this.ready !== ready) {
-            this.atb.className = ready ? 'menu_atb ready' : 'menu_atb';
-            this.container.className = ready ? 'menu_container ready' : 'menu_container';
-            this.ready = ready;
+    close() {
+        if(this.opened) {
+            this.opened = false;
+            this.container.className = 'menu_container';
         }
+    }
 
+    open() {
+        if(this.opened === false) {
+            this.opened = true;
+            this.container.className = 'menu_container opened';
+        }
     }
 
 };

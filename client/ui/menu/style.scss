@@ -1,10 +1,17 @@
-.menu_container{
+.menu_container {
   position: absolute;
   background: gold;
   width: 200px;
-  .menu_button{
+  z-index: 1;
+  .menu_button {
     background-color: grey;
     color: aliceblue;
     cursor: pointer;
+  }
+
+  height: 10px;
+
+  &.opened {
+    height: auto;
   }
 }
