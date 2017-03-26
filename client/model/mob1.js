@@ -23,6 +23,13 @@ module.exports = {
             size: 100,
             rotation: 10,
             duration: 1000
+        },
+        {
+            name: 'focus',
+            url: 'assets/fillon/fillon04.png',
+            size: 100,
+            rotation: 10,
+            duration: 1000
         }
     ],
     actions: [
@@ -33,7 +40,8 @@ module.exports = {
             desc: 'populism attack',
             damage: 4,
             state: 1,
-            probability: 1
+            probability: 1,
+            duration: 1000
         }
     ],
     waiting: [
@@ -47,5 +55,6 @@ module.exports = {
         populism: 1,
         hate: 1
     },
-    hurted: 2
+    hurted: 2,
+    focus: 3
 };

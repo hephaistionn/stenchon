@@ -53,15 +53,17 @@ module.exports = {
             desc: 'populism attack',
             damage: 4,
             cost: 1,
-            state: 2
+            state: 2,
+            duration: 1000
         },
         {
             name: 'attack2',
             type: 'personal',
             desc: 'personal attack',
-            damage: 6,
+            damage: 50,
             cost: 1,
-            state: 2
+            state: 2,
+            duration: 1000
         },
         {
             name: 'attack2',
@@ -69,7 +71,8 @@ module.exports = {
             desc: 'restore power',
             damage: 6,
             cost: 0,
-            state: 3
+            state: 3,
+            duration: 1000
         }
     ],
     waiting: [

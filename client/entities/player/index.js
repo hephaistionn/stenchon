@@ -1,10 +1,13 @@
 const Menu = require('../../ui/menu/index.js');
 const HP = require('../../ui/hp/index.js');
 const ATB = require('../../ui/atb/index.js');
+const ee = require('../../manager/eventEmitter');
 
 module.exports = class Player {
 
     constructor(model) {
+
+        this.isPlayer = true;
 
         this.dom = document.createElement('div');
         this.dom.className = 'player';
@@ -13,13 +16,10 @@ module.exports = class Player {
         this.sprite.className = 'sprite';
         this.dom.appendChild(this.sprite);
 
-        this.attackCB = null;
-        this.selectCB = null;
-        this.destroyCB = null;
-
-        this.currentState = null;
-        this.currentTarget = 0;
         this.currentAction = null;
+        this.currentTarget = null;
+        this.currentState = null;
+        this.initEvents();
 
         this.timer = 0;
         this.recoveryDuration = 5000;
@@ -34,6 +34,7 @@ module.exports = class Player {
         this.hurtedState = model.hurted;
         this.regenerationState = model.regeneration;
         this.waitingStates = model.waiting;
+        this.ready = false;
 
         this.waiting();
 
@@ -41,62 +42,39 @@ module.exports = class Player {
         this.dom.appendChild(this.atbUI.dom);
         this.hpUI = new HP(this.hp);
         this.dom.appendChild(this.hpUI.dom);
-        this.menu = new Menu(this.setAction.bind(this), model);
+        this.menu = new Menu(model);
         this.dom.appendChild(this.menu.dom);
+        this.menu.close();
+        this.disabled = false;
 
+        this.startAnimationComing();
 
     }
 
-    onAttack(cb) {
-        this.attackCB = cb;
-    }
-
-    onSelect(cb) {
-        this.selectCB = cb;
-    }
-
-    onDestroy(cb) {
-        this.destroyCB = cb;
-    }
-
-    setAction(action) {
-        if(this.willpower >= action.cost) {
-            this.currentAction = action;
-            this.currentTarget = 0;
-            this.setState(this.states[this.focusState]);
-            this.selectCB(action);
-        }
-    }
-
-    setTarget(index) {
-        this.currentTarget = index;
-    }
-
-    attack() {
+    startAction() {
         this.willpower -= this.currentAction.cost;
         this.setState(this.states[this.currentAction.state]);
-        this.attackCB(this.currentAction.damage, this.currentAction.type, this.currentTarget);
         this.recovery = 0;
         this.startAnimationAttack();
     }
 
-    hurted(damage, type) {
-        const factor = this.weakness[type];
-        this.hp -= factor * damage;
-        this.hp = Math.max(this.hp, 0);
-        this.hpUI.update(this.hp / this.hpMax);
-        this.startAnimationStriken();
-        this.setState(this.states[this.hurtedState]);
-        if(this.hp < 1) {
-            this.destroyCB()
+    affected(action) {
+        if(action.type === 'conviction') {
+            this.willpower += action.value;
+            this.setState(this.states[this.regenerationState]);
+            this.startAnimationStriken();
+            this.recovery = 0;
+        } else {
+            const factor = this.weakness[action.type];
+            this.hp -= factor * action.damage;
+            this.hp = Math.max(this.hp, 0);
+            this.hpUI.update(this.hp / this.hpMax);
+            this.startAnimationStriken();
+            this.setState(this.states[this.hurtedState]);
+            if(this.hp < 1) {
+                this.destroy();
+            }
         }
-    }
-
-    regeneration(action) {
-        this.willpower += action.value;
-        this.setState(this.states[this.regenerationState]);
-        this.currentAction = action;
-        this.recovery = 0;
     }
 
     setState(state) {
@@ -117,7 +95,8 @@ module.exports = class Player {
     }
 
     update(dt) {
-
+        if(this.disabled)return;
+        if(this.currentAction) return;
         if(this.timer > this.currentState.duration) {
             this.waiting();
         }
@@ -126,7 +105,11 @@ module.exports = class Player {
         this.recovery += dt;
         this.recovery = Math.min(this.recoveryDuration, this.recovery);
         this.atb = this.recovery / this.recoveryDuration;
-        this.atb === 1 ? this.menu.open() : this.menu.close();
+        if(this.atb === 1 && this.ready === false) {
+            this.ready = true;
+            this.menu.open();
+        }
+
         this.atbUI.update(this.atb);
     }
 
@@ -146,8 +129,70 @@ module.exports = class Player {
         }, 1000)
     }
 
+    startAnimationComing() {
+        this.dom.className = this.dom.className.replace(' comingRight', '');
+        this.dom.className += ' comingRight';
+        this.timerAnimation = setTimeout(()=> {
+            this.dom.className = this.dom.className.replace(' comingRight', '');
+        }, 1000)
+    }
+
+    startAnimationDestroy(cb) {
+        this.dom.className = this.dom.className.replace(' destroyed', '');
+        this.dom.className += ' destroyed';
+        this.timerAnimation = setTimeout(()=> {
+            this.dom.className = this.dom.className.replace(' destroyed', '');
+            cb();
+        }, 1000)
+    }
+
+    destroy() {
+        this.disabled = true;
+        this.startAnimationDestroy(()=> {
+            ee.emit('destroy', this);
+        });
+    }
+
+    initEvents() {
+        this._onSelectAction = action  => {
+            this.currentAction = action;
+            this.menu.close();
+            this.pushAction();
+        };
+        this._onSelectTarget = target  => {
+            this.currentTarget = target;
+            this.pushAction();
+        };
+        ee.on('selectAction', this._onSelectAction);
+        ee.on('selectTarget', this._onSelectTarget);
+    }
+
+    pushAction() {
+        if(this.currentAction && this.currentTarget || this.currentAction.type === 'conviction') {
+            ee.emit('pushAction', {
+                action: this.currentAction,
+                target: this.currentTarget || this,
+                source: this,
+                onPrepare: () => {
+                    this.setState(this.states[this.focusState]);
+                },
+                onStart: (target, action) => {
+                    this.startAction();
+                    target.affected(action);
+                },
+                onFinish: ()=> {
+                    this.currentAction = null;
+                    this.currentTarget = null;
+                    this.ready = false;
+                }
+            });
+        }
+    }
+
     onRemoved() {
         clearTimeout(this.timerStriken);
+        ee.off('selectAction', this._onSelectAction);
+        ee.off('selectTarget', this._onSelectTarget);
     }
 
 };

@@ -1,6 +1,8 @@
+const ee = require('../../manager/eventEmitter');
+
 module.exports = class Menu {
 
-    constructor(cb, model) {
+    constructor(model) {
         this.dom = document.createElement('div');
         this.dom.className = 'menu';
 
@@ -15,8 +17,20 @@ module.exports = class Menu {
             button.className = 'menu_button';
             button.textContent = action.name;
             button.onclick = ()=> {
-                cb(action)
+                ee.emit('selectAction', action);
             };
+
+            button.onmouseover = () => {
+                this.container.childNodes.forEach(node=> {
+                    node.className = 'menu_button';
+                });
+                button.className = 'menu_button focus';
+            };
+
+            const pointer = document.createElement('div');
+            pointer.className = 'pointer';
+            button.appendChild(pointer);
+
             this.container.appendChild(button);
         });
     }

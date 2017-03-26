@@ -1,14 +1,11 @@
 .mob {
   position: absolute;
-  top: 200px;
-  right: 10px;
+  top: 0;
+  right: 0;
   width: 400px;
   height: 400px;
-  transform: translate(0px, 0px);
-  transition: transform 120ms;
-  &.attack {
-    transform: translate(-400px, -200px);
-  }
+  transform: translate(0px, 200px) scale(1, 1);
+  transition: transform 500ms;
   .sprite {
     position: absolute;
     background-size: 100%;
@@ -18,4 +15,56 @@
     height: 100%;
   }
 
+  .pointer {
+    position: relative;
+    left: -118px;
+    top: 212px;
+    display: none;
+  }
+
+  &.selectable {
+    .pointer {
+      display: block;
+    }
+  }
+
+}
+
+.mob {
+  &.n1 {
+    &.m0 {
+      transform: translate(0px, 200px) scale(1, 1);
+    }
+  }
+;
+  &.n2 {
+    &.m0 {
+      transform: translate(0px, 100px) scale(0.5, 0.5);
+    }
+    &.m1 {
+      transform: translate(0px, 300px) scale(1, 1);
+    }
+  }
+;
+
+  &.n3 {
+    &.m0 {
+      transform: translate(0px, 50px) scale(0.3, 0.3);
+    }
+    &.m1 {
+      transform: translate(0px, 100px) scale(0.5, 0.5);
+    }
+    &.m2 {
+      transform: translate(0px, 300px) scale(1, 1);
+    }
+  }
+;
+
+  &.attack {
+    transition: transform 120ms !important;
+    transform: translate(-400px, 100px) scale(1, 1) !important;
+  }
+  &.coming {
+    transform: translate(350px, 0px) scale(1, 1) !important;
+  }
 }
