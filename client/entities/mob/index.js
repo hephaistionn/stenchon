@@ -37,7 +37,6 @@ module.exports = class Mob {
         this.atb = this.recovery / this.recoveryDuration;
         this.hp = model.hp;
         this.hpMax = model.hp;
-        this.willpower = model.willpower;
         this.states = model.states;
         this.weakness = model.weakness;
         this.hurtedState = model.hurted;
@@ -70,18 +69,17 @@ module.exports = class Mob {
     }
 
     startAction() {
-        this.willpower -= this.currentAction.cost;
+        this.recovery -= this.currentAction.cost;
+        this.recovery = Math.max(0, this.recovery);
         this.setState(this.states[this.currentAction.state]);
-        this.recovery = 0;
         this.startAnimationAttack();
     }
 
     affected(action) {
         if(action.type === 'conviction') {
-            this.willpower += action.value;
+            this.hp += action.value;
             this.setState(this.states[this.regenerationState]);
             this.startAnimationStriken();
-            this.recovery = 0;
         } else {
             const factor = this.weakness[action.type];
             this.hp -= factor * action.damage;

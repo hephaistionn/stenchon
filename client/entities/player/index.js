@@ -27,7 +27,6 @@ module.exports = class Player {
         this.hp = model.hp;
         this.atb = this.recovery / this.recoveryDuration;
         this.hpMax = model.hp;
-        this.willpower = model.willpower;
         this.focusState = model.focus;
         this.states = model.states;
         this.weakness = model.weakness;
@@ -52,18 +51,15 @@ module.exports = class Player {
     }
 
     startAction() {
-        this.willpower -= this.currentAction.cost;
         this.setState(this.states[this.currentAction.state]);
-        this.recovery = 0;
         this.startAnimationAttack();
     }
 
     affected(action) {
         if(action.type === 'conviction') {
-            this.willpower += action.value;
+            this.hp += action.damage;
             this.setState(this.states[this.regenerationState]);
             this.startAnimationStriken();
-            this.recovery = 0;
         } else {
             const factor = this.weakness[action.type];
             this.hp -= factor * action.damage;
@@ -105,12 +101,13 @@ module.exports = class Player {
         this.recovery += dt;
         this.recovery = Math.min(this.recoveryDuration, this.recovery);
         this.atb = this.recovery / this.recoveryDuration;
+        this.atbUI.update(this.atb);
         if(this.atb === 1 && this.ready === false) {
             this.ready = true;
             this.menu.open();
         }
 
-        this.atbUI.update(this.atb);
+
     }
 
     startAnimationStriken() {
@@ -156,6 +153,11 @@ module.exports = class Player {
     initEvents() {
         this._onSelectAction = action  => {
             this.currentAction = action;
+            this.recovery -= this.currentAction.cost;
+            this.recovery = Math.max(0, this.recovery);
+            if(action.type === 'conviction') {
+                this.currentTarget = this;
+            }
             this.menu.close();
             this.pushAction();
         };

@@ -1,7 +1,6 @@
 module.exports = {
     hp: 15,
     name: 'mob3',
-    willpower: 100,
     states: [
         {
             name: 'waiting',
@@ -38,7 +37,7 @@ module.exports = {
             type: 'personal',
             cost: 1,
             desc: 'populism attack',
-            damage: 4,
+            damage: 3500,
             state: 1,
             probability: 1,
             duration: 1000

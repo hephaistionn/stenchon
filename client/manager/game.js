@@ -192,12 +192,12 @@ module.exports = class Manager {
                 this.blurAll();
                 event.preventDefault();
             }
-
         };
 
         document.addEventListener('keydown', this._down);
 
-        this._onSelectAction = ()=> {
+        this._onSelectAction = action=> {
+            if(action.type === 'conviction') return;
             this.selectMob = true;
             this.currentFocus = 0;
             this.updateFocus();

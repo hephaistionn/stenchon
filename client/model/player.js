@@ -1,6 +1,5 @@
 module.exports = {
     hp: 200,
-    willpower: 20,
     name: 'Melenchon',
     states: [
         {
@@ -52,7 +51,7 @@ module.exports = {
             type: 'populism',
             desc: 'populism attack',
             damage: 4,
-            cost: 1,
+            cost: 2000,
             state: 2,
             duration: 1000
         },
@@ -61,7 +60,7 @@ module.exports = {
             type: 'personal',
             desc: 'personal attack',
             damage: 50,
-            cost: 1,
+            cost: 3000,
             state: 2,
             duration: 1000
         },
@@ -69,8 +68,8 @@ module.exports = {
             name: 'attack2',
             type: 'conviction',
             desc: 'restore power',
-            damage: 6,
-            cost: 0,
+            damage: 70,
+            cost: 5000,
             state: 3,
             duration: 1000
         }
