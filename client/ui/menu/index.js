@@ -12,7 +12,9 @@ module.exports = class Menu {
 
         this.opened = false;
 
-        model.actions.forEach(action => {
+        this.actions = model.actions;
+
+        this.actions.forEach(action => {
             const button = document.createElement('div');
             button.className = 'menu_button';
             button.textContent = action.name;
@@ -39,14 +41,54 @@ module.exports = class Menu {
         if(this.opened) {
             this.opened = false;
             this.container.className = 'menu_container';
+            this.cleanEvents();
         }
     }
 
     open() {
         if(this.opened === false) {
             this.opened = true;
+            this.currentfocus = 0;
             this.container.className = 'menu_container opened';
+            this.initEvents();
+            this.updateFocus();
         }
     }
+
+    updateFocus() {
+        this.container.childNodes.forEach(node=> {
+            node.className = 'menu_button';
+        });
+        this.container.childNodes[this.currentfocus].className = 'menu_button  focus';
+    }
+
+    initEvents() {
+        this.currentfocus = 0;
+        this._down = (event)=> {
+            if(event.keyCode === 38) {
+                this.currentfocus--;
+                this.currentfocus = Math.max(0, this.currentfocus);
+                event.preventDefault();
+            } else if(event.keyCode === 40) {
+                this.currentfocus++;
+                this.currentfocus = Math.min(this.currentfocus, this.actions.length - 1);
+                event.preventDefault();
+            } else if(event.keyCode === 13) {
+                ee.emit('selectAction', this.actions[this.currentfocus]);
+                event.preventDefault();
+            }
+            this.updateFocus();
+        };
+        document.addEventListener('keydown', this._down);
+    }
+
+    cleanEvents() {
+        document.removeEventListener('keydown', this._down);
+    }
+
+    onRemoved() {
+        this.cleanEvents();
+    }
+
 
 };

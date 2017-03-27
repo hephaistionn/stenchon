@@ -29,11 +29,15 @@
     position: absolute;
     bottom: 10px;
     background-color: #009926;
-    .left {
+    &.left {
       left: 20px;
     }
-    .rigth {
+    &.rigth {
       right: 20px;
+    }
+
+    &.focus {
+      background-color: yellow;
     }
   }
 

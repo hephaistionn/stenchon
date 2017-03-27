@@ -18,6 +18,12 @@ module.exports = class Mob {
             }
         };
 
+        this.dom.onmouseover = () => {
+            if(this.selectable) {
+                ee.emit('onFocus', this);
+            }
+        };
+
         const pointer = document.createElement('div');
         pointer.className = 'pointer';
         this.dom.appendChild(pointer);
@@ -52,6 +58,15 @@ module.exports = class Mob {
         this.dom.appendChild(this.hpUI.dom);
 
         this.startAnimationComing();
+    }
+
+    focus() {
+        this.dom.className = this.dom.className.replace(' focus', '');
+        this.dom.className += ' focus';
+    }
+
+    blur() {
+        this.dom.className = this.dom.className.replace(' focus', '');
     }
 
     startAction() {

@@ -15,10 +15,18 @@ module.exports = class Manager {
         this.level = 0;
         this.queue = [];
         this.busy = false;
+        this.currentFocus = 0;
+        this.selectMob = false;
         this.ia = new IA();
         this._onPushAction = ()=> {
         };
         this._onDestroy = ()=> {
+        };
+        this._onFocus = ()=> {
+        };
+        this._down = ()=> {
+        };
+        this._onSelectAction = ()=> {
         };
         this.goHome();
     }
@@ -41,7 +49,14 @@ module.exports = class Manager {
         for(let i = 0; i < this.entities.length; i++) {
             this.remove(this.entities[i]);
         }
-        this.remove(this.home);
+        this.entities = [];
+        this.level = 0;
+        this.queue = [];
+        this.busy = false;
+        this.currentFocus = 0;
+        if(this.home)
+            this.remove(this.home);
+        this.home = null;
     }
 
     loop(dt) {
@@ -101,6 +116,7 @@ module.exports = class Manager {
 
     lose() {
         this.stopLoop();
+        debugger;
         const modal = new Modal('game is loosed', 'retry', ()=> {
             this.remove(modal);
             this.startGame();
@@ -125,6 +141,19 @@ module.exports = class Manager {
         this.add(modal);
     }
 
+    updateFocus() {
+        this.entities.forEach(entity=> {
+            if(entity.blur)entity.blur()
+        });
+        this.entities[this.currentFocus + 1].focus();
+    }
+
+    blurAll() {
+        this.entities.forEach(entity=> {
+            if(entity.blur)entity.blur()
+        });
+    }
+
     initEvents() {
         this._onPushAction = instruction => {
             this.addInQueue(instruction);
@@ -135,11 +164,53 @@ module.exports = class Manager {
         ee.on('pushAction', this._onPushAction);
         ee.on('destroy', this._onDestroy);
         this.queue = [];
+
+
+        this._onFocus = entity => {
+            this.entities.forEach(entityz=> {
+                if(entityz.blur)entityz.blur();
+            });
+            entity.focus();
+        };
+        ee.on('onFocus', this._onFocus);
+
+        this._down = (event)=> {
+            if(!this.selectMob)return;
+            if(event.keyCode === 38) {
+                this.currentFocus--;
+                this.currentFocus = Math.max(0, this.currentFocus);
+                this.updateFocus();
+                event.preventDefault();
+            } else if(event.keyCode === 40) {
+                this.currentFocus++;
+                this.currentFocus = Math.min(this.currentFocus, this.entities.length - 2);
+                this.updateFocus();
+                event.preventDefault();
+            } else if(event.keyCode === 13) {
+                ee.emit('selectTarget', this.entities[this.currentFocus + 1]);
+                this.selectMob = false;
+                this.blurAll();
+                event.preventDefault();
+            }
+
+        };
+
+        document.addEventListener('keydown', this._down);
+
+        this._onSelectAction = ()=> {
+            this.selectMob = true;
+            this.currentFocus = 0;
+            this.updateFocus();
+        };
+        ee.on('selectAction', this._onSelectAction);
     }
 
     cleanEvents() {
         ee.off('pushAction', this._onPushAction);
         ee.off('destroy', this._onDestroy);
+        ee.off('onFocus', this._onFocus);
+        ee.off('selectAction', this._onSelectAction);
+        document.removeEventListener('keydown', this._down);
         clearTimeout(this.timer);
     }
 
@@ -161,6 +232,7 @@ module.exports = class Manager {
     }
 
     onDestroy(entity) {
+        this.currentFocus = 0;
         this.remove(entity);
         const index = this.entities.indexOf(entity);
         this.entities.splice(index, 1);

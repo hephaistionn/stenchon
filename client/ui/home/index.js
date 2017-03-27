@@ -29,6 +29,17 @@ module.exports = class Home {
         button.textContent = model.home.buttonLabel;
         button.onclick = cb;
         container.appendChild(button);
+
+        this._down = (event)=> {
+            if(event.keyCode === 13) {
+                cb();
+            }
+        };
+        document.addEventListener('keydown', this._down)
+    }
+
+    onRemoved() {
+        document.removeEventListener('keydown', this._down);
     }
 
 };

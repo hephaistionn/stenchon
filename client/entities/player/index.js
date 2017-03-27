@@ -193,6 +193,7 @@ module.exports = class Player {
         clearTimeout(this.timerStriken);
         ee.off('selectAction', this._onSelectAction);
         ee.off('selectTarget', this._onSelectTarget);
+        this.menu.onRemoved();
     }
 
 };
