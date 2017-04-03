@@ -1,5 +1,7 @@
 const HP = require('../../ui/hp/index.js');
 const ATB = require('../../ui/atb/index.js');
+const Name = require('../../ui/name/index.js');
+const type = require('../../model/actionType');
 const ee = require('../../manager/eventEmitter');
 
 module.exports = class Mob {
@@ -7,6 +9,7 @@ module.exports = class Mob {
     constructor(model, index, nbMob) {
 
         this.dom = document.createElement('div');
+
         this.dom.className = 'mob n' + index + '  m' + nbMob;
 
         this.sprite = document.createElement('div');
@@ -32,7 +35,7 @@ module.exports = class Mob {
 
         this.currentState = null;
         this.timer = 0;
-        this.recoveryDuration = 5000;
+        this.recoveryDuration = model.power;
         this.recovery = Math.random() * 0.5 * this.recoveryDuration;
         this.atb = this.recovery / this.recoveryDuration;
         this.hp = model.hp;
@@ -40,7 +43,7 @@ module.exports = class Mob {
         this.states = model.states;
         this.weakness = model.weakness;
         this.hurtedState = model.hurted;
-        this.regenerationState = model.regeneration;
+        this.startState = model.start;
         this.focusState = model.focus;
         this.waitingStates = model.waiting;
         this.actions = model.actions;
@@ -48,6 +51,7 @@ module.exports = class Mob {
         this.currentTarget = null;
         this.selectable = false;
         this.disabled = false;
+        this.name = model.name;
 
         this.waiting();
 
@@ -55,11 +59,15 @@ module.exports = class Mob {
         this.dom.appendChild(this.atbUI.dom);
         this.hpUI = new HP(this.hp);
         this.dom.appendChild(this.hpUI.dom);
+        const nameUI = new Name(this.name);
+        this.dom.appendChild(nameUI.dom);
+
 
         this.startAnimationComing();
     }
 
     focus() {
+        if(!this.selectable) return;
         this.dom.className = this.dom.className.replace(' focus', '');
         this.dom.className += ' focus';
     }
@@ -68,7 +76,9 @@ module.exports = class Mob {
         this.dom.className = this.dom.className.replace(' focus', '');
     }
 
-    startAction() {
+    startAction(currentAction) {
+        if(currentAction)
+            this.currentAction = currentAction;
         this.recovery -= this.currentAction.cost;
         this.recovery = Math.max(0, this.recovery);
         this.setState(this.states[this.currentAction.state]);
@@ -76,12 +86,21 @@ module.exports = class Mob {
     }
 
     affected(action) {
-        if(action.type === 'conviction') {
+        if(action.type === type.renforcement) {
             this.hp += action.value;
-            this.setState(this.states[this.regenerationState]);
+            this.setState(this.states[action.state]);
+            this.startAnimationStriken();
+        } else if(action.type === type.defense) {
+            if(!this.weakness.updated)
+                Object.keys(this.weakness).map((objectKey) => {
+                    this.weakness[objectKey] = this.weakness[objectKey] + 0.2;
+                });
+
+            this.weakness.updated = true;
+            this.setState(this.states[action.state]);
             this.startAnimationStriken();
         } else {
-            const factor = this.weakness[action.type];
+            const factor = this.weakness[type[action.type]];
             this.hp -= factor * action.damage;
             this.hp = Math.max(this.hp, 0);
             this.hpUI.update(this.hp / this.hpMax);
@@ -117,7 +136,7 @@ module.exports = class Mob {
         }
         this.timer += dt;
         if(this.currentAction) return;
-        this.recovery += dt;
+        this.recovery += dt / 100;
         this.recovery = Math.min(this.recoveryDuration, this.recovery);
         this.atb = this.recovery / this.recoveryDuration;
         this.atbUI.update(this.atb);
@@ -144,6 +163,7 @@ module.exports = class Mob {
     }
 
     startAnimationComing() {
+        this.setState(this.states[this.startState]);
         this.dom.className = this.dom.className.replace(' coming', '');
         this.dom.className += ' coming';
         this.timerAnimation = setTimeout(()=> {
@@ -176,7 +196,8 @@ module.exports = class Mob {
     }
 
     initEvents() {
-        this._onSelectAction = () => {
+        this._onSelectAction = (action) => {
+            if(action.type === type.renforcement || action.type === type.defense) return;
             this.dom.className = this.dom.className.replace(' selectable', '');
             this.dom.className += ' selectable';
             this.selectable = true;
@@ -190,16 +211,16 @@ module.exports = class Mob {
     }
 
     pushAction() {
-        if(this.currentAction && this.currentTarget || this.currentAction.type === 'conviction') {
+        if(this.currentAction && this.currentTarget) {
             ee.emit('pushAction', {
                 action: this.currentAction,
-                target: this.currentTarget || this,
+                target: this.currentTarget,
                 source: this,
                 onPrepare: () => {
                     this.setState(this.states[this.focusState]);
                 },
                 onStart: (target, action) => {
-                    this.startAction();
+                    this.startAction(action);
                     target.affected(action);
                 },
                 onFinish: ()=> {

@@ -1,0 +1,23 @@
+.action_ui {
+  position: relative;
+  top: 0;
+  color: white;
+  text-shadow: 0 0 13px $blue;
+  font-size: 2em;
+  text-align: center;
+  z-index: 1;
+  margin: 3% auto;
+  opacity: 0;
+  transition: opacity 500ms;
+  .action_name {
+    font-size: 2em;
+  }
+  .action_desc {
+    font-size: 1.3em;
+  }
+  &.show {
+    opacity: 1;
+  }
+
+}
+

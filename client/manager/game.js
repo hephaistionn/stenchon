@@ -1,8 +1,12 @@
 const Player = require('../entities/player');
+const Decor = require('../entities/decor');
 const Mob = require('../entities/mob');
 const Home = require('../ui/home');
 const Modal = require('../ui/modal');
+const Action = require('../ui/action');
 const modelMobs = require('../model/mobs');
+const modelUi = require('../model/ui');
+const type = require('../model/actionType');
 const modelPlayer = require('../model/player');
 const ee = require('./eventEmitter');
 const IA = require('./IA');
@@ -18,6 +22,7 @@ module.exports = class Manager {
         this.currentFocus = 0;
         this.selectMob = false;
         this.ia = new IA();
+        this.pause = false;
         this._onPushAction = ()=> {
         };
         this._onDestroy = ()=> {
@@ -56,14 +61,21 @@ module.exports = class Manager {
         this.currentFocus = 0;
         if(this.home)
             this.remove(this.home);
+        if(this.decor)
+            this.remove(this.decor);
+        if(this.action_ui)
+            this.remove(this.action_ui);
         this.home = null;
+        this.decor = null;
+        this.action_ui = null;
     }
 
     loop(dt) {
+        if(this.pause) return;
+        this.spawner();
         for(let i = 0; i < this.entities.length; i++) {
             this.entities[i].update(dt);
         }
-        this.spawner();
         this.unwrapActions();
     }
 
@@ -72,8 +84,16 @@ module.exports = class Manager {
             const mobs = modelMobs.timeline[this.level];
             this.level++;
             if(mobs && mobs.length) {
+                let modelMob = [];
+                let ctn = 0;
                 mobs.forEach(index => {
-                    this.newMob(modelMobs.mobs[index], index, mobs.length);
+                    this.newMob(modelMobs.mobs[index], ctn, mobs.length);
+                    ctn++;
+                    modelMob.push(modelMobs.mobs[index]);
+                });
+                this.pause = true;
+                this.decor.startBattle(modelMob, modelPlayer, ()=> {
+                    this.pause = false;
                 });
             } else {
                 this.win();
@@ -82,13 +102,19 @@ module.exports = class Manager {
     }
 
     newPlayer() {
+        this.decor = new Decor();
+        this.action_ui = new Action();
+        this.add(this.decor);
+        this.add(this.action_ui);
         this.player = new Player(modelPlayer);
         this.entities.push(this.player);
         this.add(this.player);
         this.ia.setPlayer(this.player);
+
+
     }
 
-    newMob(model, nbMob, index) {
+    newMob(model, index, nbMob) {
         const mob = new Mob(model, index, nbMob);
         this.entities.push(mob);
         this.add(mob);
@@ -115,9 +141,9 @@ module.exports = class Manager {
     }
 
     lose() {
+        this.pause = true;
         this.stopLoop();
-        debugger;
-        const modal = new Modal('game is loosed', 'retry', ()=> {
+        const modal = new Modal(modelUi.lose.title, modelUi.lose.desc, 'retry', ()=> {
             this.remove(modal);
             this.startGame();
         });
@@ -125,9 +151,10 @@ module.exports = class Manager {
     }
 
     win() {
+        this.pause = true;
         this.stopLoop();
         const modal = new Modal(
-            'game is won',
+            modelUi.victory.title, modelUi.victory.desc,
             'retry', ()=> {
                 this.remove(modal);
                 this.startGame();
@@ -197,7 +224,7 @@ module.exports = class Manager {
         document.addEventListener('keydown', this._down);
 
         this._onSelectAction = action=> {
-            if(action.type === 'conviction') return;
+            if(action.type === type.renforcement || action.type === type.defense) return;
             this.selectMob = true;
             this.currentFocus = 0;
             this.updateFocus();
@@ -221,20 +248,25 @@ module.exports = class Manager {
 
     unwrapActions() {
         if(this.queue.length && this.busy === false) {
+            this.pause = true;
             const instruction = this.queue.shift();
             instruction.onStart(instruction.target, instruction.action);
+            this.decor.startAtttack();
             this.busy = true;
+            this.action_ui.displayAction(instruction.action, instruction.source);
             this.timer = setTimeout(()=> {
                 instruction.onFinish();
                 this.busy = false;
+                this.pause = false;
             }, instruction.action.duration)
         }
     }
 
     onDestroy(entity) {
         this.currentFocus = 0;
-        this.remove(entity);
         const index = this.entities.indexOf(entity);
+        if(entity === -1) return;
+        this.remove(entity);
         this.entities.splice(index, 1);
         if(entity.isPlayer) {
             this.stopLoop();

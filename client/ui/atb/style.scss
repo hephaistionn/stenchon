@@ -1,12 +1,22 @@
 .atb_container {
   color: #d1472d;
   background-color: #ffffff;
-  border: solid 10px;
+  border: solid 7px;
   position: absolute;
-  top: 460px;
-  width: 500px;
-  height: 25px;
+  top: 299px;
+  width: 380px;
+  height: 35px;
   overflow: hidden;
+  box-sizing: border-box;
+
+  .label {
+    color: #13485a;
+    z-index: 8;
+    font-size: 15px;
+    top: 0;
+    left: 7px;
+    position: absolute;
+  }
 }
 
 .atb_value {
@@ -23,6 +33,10 @@
   }
   .atb_value {
     right: 0;
+  }
+  .label {
+    right: 7px;
+    left: initial;
   }
 }
 

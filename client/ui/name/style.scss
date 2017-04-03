@@ -1,0 +1,15 @@
+.name_ui {
+  position: absolute;
+  top: 256px;
+  text-shadow: 0 0 2px black;
+  color: white;
+  font-size: 2em;
+  left: 24px;
+}
+
+.mob {
+  .name_ui {
+    right: 8px;
+    left: auto;
+  }
+}

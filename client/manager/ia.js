@@ -1,15 +1,17 @@
 const ee = require('./eventEmitter');
+const type = require('../model/actionType');
 
 module.exports = class IA {
 
     constructor() {
         ee.on('entityReady', entity=> {
-            const randomValue = Math.random() * entity.actions.length;
+            const randomValue = Math.random();
             const action = entity.actions.filter((state)=> {
-                return state.probability >= randomValue;
+                return randomValue >= state.probability;
             })[0];
-            entity.selectAction(action, this.player);
-        })
+            const target = action.type === type.defense || action.type === type.renforcement ? entity : this.player;
+            entity.selectAction(action, target);
+        });
 
     }
 

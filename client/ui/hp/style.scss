@@ -1,17 +1,27 @@
 .hp_container {
   color: #d1472d;
   background-color: #ffffff;
-  border: solid 10px;
+  border: solid 8px;
   position: absolute;
-  top: 400px;
-  width: 500px;
+  top: 328px;
+  width: 330px;
   height: 60px;
+  box-sizing: border-box;
+
+  .label {
+    color: #13485a;
+    z-index: 8;
+    font-size: 16px;
+    top: 12px;
+    left: 7px;
+    position: absolute;
+  }
 }
 
 .hp_value {
   position: absolute;
   top: 0;
-  height: 60px;
+  height: 100%;
   background-color: #0086B3;
 }
 
@@ -21,6 +31,11 @@
   }
   .hp_value {
     right: 0;
+  }
+
+  .label {
+    right: 7px;
+    left: initial;
   }
 }
 

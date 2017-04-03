@@ -1,7 +1,43 @@
+$orange: #d1472d;
+$blue: #0086b3;
+$white: #f9fbff;
+$black: #373738;
+$background: rgba(0, 0, 0, 0.7);
+
+@font-face {
+  font-family: "gamehome";
+  src: url("assets/adrip1.ttf");
+}
+
+@font-face {
+  font-family: "gamedefault";
+  src: url("assets/IMMORTAL.ttf");
+}
+
+body {
+  font-family: gamedefault;
+  background-color: $orange;
+}
+
+#game {
+  position: fixed;
+  background-color: #654e2d;
+  background-image: url(assets/background/gamebackground3.jpg);
+  background-repeat: no-repeat;
+  background-size: 100%;
+  width: 97%;
+  height: 94%;
+  margin: 1% 1% 1% 1%;
+  padding: 0;
+}
+
 @import "./entities/mob/style";
 @import "./entities/player/style";
+@import "./entities/decor/style";
 @import "./ui/home/style";
 @import "./ui/menu/style";
+@import "./ui/action/style";
 @import "./ui/modal/style";
 @import "./ui/hp/style";
+@import "./ui/name/style";
 @import "./ui/atb/style";

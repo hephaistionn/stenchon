@@ -10,6 +10,11 @@ module.exports = class HP {
         this.dom.appendChild(this.hpValue);
         this.value = 0;
         this.update(value);
+
+        const label = document.createElement('div');
+        label.className = 'label';
+        label.textContent = model.hp;
+        this.dom.appendChild(label);
     }
 
     update(value) {

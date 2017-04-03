@@ -13,6 +13,11 @@ module.exports = class ATB {
         this.value = 0;
         this.direction = direction;
 
+        const label = document.createElement('div');
+        label.className = 'label';
+        label.textContent = model.power;
+        this.dom.appendChild(label);
+
         this.update(value);
     }
 

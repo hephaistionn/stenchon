@@ -1,6 +1,8 @@
 const Menu = require('../../ui/menu/index.js');
 const HP = require('../../ui/hp/index.js');
 const ATB = require('../../ui/atb/index.js');
+const Name = require('../../ui/name/index.js');
+const type = require('../../model/actionType');
 const ee = require('../../manager/eventEmitter');
 
 module.exports = class Player {
@@ -22,7 +24,7 @@ module.exports = class Player {
         this.initEvents();
 
         this.timer = 0;
-        this.recoveryDuration = 5000;
+        this.recoveryDuration = model.power;
         this.recovery = Math.random() * this.recoveryDuration;
         this.hp = model.hp;
         this.atb = this.recovery / this.recoveryDuration;
@@ -31,9 +33,9 @@ module.exports = class Player {
         this.states = model.states;
         this.weakness = model.weakness;
         this.hurtedState = model.hurted;
-        this.regenerationState = model.regeneration;
         this.waitingStates = model.waiting;
         this.ready = false;
+        this.name = model.name;
 
         this.waiting();
 
@@ -45,23 +47,29 @@ module.exports = class Player {
         this.dom.appendChild(this.menu.dom);
         this.menu.close();
         this.disabled = false;
+        const nameUI = new Name(this.name);
+        this.dom.appendChild(nameUI.dom);
 
         this.startAnimationComing();
 
     }
 
-    startAction() {
+    startAction(currentAction) {
+        if(currentAction)
+            this.currentAction = currentAction;
         this.setState(this.states[this.currentAction.state]);
         this.startAnimationAttack();
     }
 
     affected(action) {
-        if(action.type === 'conviction') {
+        if(action.type === type.renforcement) {
             this.hp += action.damage;
-            this.setState(this.states[this.regenerationState]);
+            this.hp = Math.min(this.hpMax, this.hp);
+            this.hpUI.update(this.hp / this.hpMax);
+            this.setState(this.states[action.state]);
             this.startAnimationStriken();
         } else {
-            const factor = this.weakness[action.type];
+            const factor = this.weakness[type[action.type]];
             this.hp -= factor * action.damage;
             this.hp = Math.max(this.hp, 0);
             this.hpUI.update(this.hp / this.hpMax);
@@ -98,7 +106,7 @@ module.exports = class Player {
         }
         this.timer += dt;
         if(this.currentAction) return;
-        this.recovery += dt;
+        this.recovery += dt / 100;
         this.recovery = Math.min(this.recoveryDuration, this.recovery);
         this.atb = this.recovery / this.recoveryDuration;
         this.atbUI.update(this.atb);
@@ -115,7 +123,7 @@ module.exports = class Player {
         this.sprite.className += ' stricken';
         this.timerStriken = setTimeout(()=> {
             this.sprite.className = this.sprite.className.replace(' stricken', '');
-        }, 1000)
+        }, 1000);
     }
 
     startAnimationAttack() {
@@ -123,7 +131,7 @@ module.exports = class Player {
         this.dom.className += ' attack';
         this.timerStriken = setTimeout(()=> {
             this.dom.className = this.dom.className.replace(' attack', '');
-        }, 1000)
+        }, 1000);
     }
 
     startAnimationComing() {
@@ -131,7 +139,7 @@ module.exports = class Player {
         this.dom.className += ' comingRight';
         this.timerAnimation = setTimeout(()=> {
             this.dom.className = this.dom.className.replace(' comingRight', '');
-        }, 1000)
+        }, 2500);
     }
 
     startAnimationDestroy(cb) {
@@ -140,7 +148,7 @@ module.exports = class Player {
         this.timerAnimation = setTimeout(()=> {
             this.dom.className = this.dom.className.replace(' destroyed', '');
             cb();
-        }, 1000)
+        }, 1000);
     }
 
     destroy() {
@@ -155,7 +163,7 @@ module.exports = class Player {
             this.currentAction = action;
             this.recovery -= this.currentAction.cost;
             this.recovery = Math.max(0, this.recovery);
-            if(action.type === 'conviction') {
+            if(this.currentAction.type === type.renforcement || this.currentAction.type === type.defense) {
                 this.currentTarget = this;
             }
             this.menu.close();
@@ -170,16 +178,16 @@ module.exports = class Player {
     }
 
     pushAction() {
-        if(this.currentAction && this.currentTarget || this.currentAction.type === 'conviction') {
+        if(this.currentAction && this.currentTarget) {
             ee.emit('pushAction', {
                 action: this.currentAction,
-                target: this.currentTarget || this,
+                target: this.currentTarget,
                 source: this,
                 onPrepare: () => {
                     this.setState(this.states[this.focusState]);
                 },
                 onStart: (target, action) => {
-                    this.startAction();
+                    this.startAction(action);
                     target.affected(action);
                 },
                 onFinish: ()=> {

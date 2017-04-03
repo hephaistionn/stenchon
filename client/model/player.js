@@ -1,77 +1,123 @@
+const type = require('./actionType');
 module.exports = {
-    hp: 200,
-    name: 'Melenchon',
+    hp: 100*6,
+    power: 100,
+    name: 'Mélenchon',
+    slogan: 'Can\'t stenchon stop Melenchon',
     states: [
         {
-            name: 'waiting',
-            url: 'assets/melenchon/melenchon08.png',
+            name: 'wait',
+            url: 'assets/melenchon/wait.png',
             size: 100,
             rotation: 0,
-            duration: 1000
+            duration: 2000
         },
         {
             name: 'focus',
-            url: 'assets/melenchon/melenchon06.png',
+            url: 'assets/melenchon/focus.png',
             size: 100,
             rotation: 0,
             duration: 1000000
         },
         {
-            name: 'attacking',
-            url: 'assets/melenchon/melenchon01.png',
-            size: 110,
-            rotation: 10,
-            duration: 1000
-        },
-        {
-            name: 'meeting',
-            url: 'assets/melenchon/melenchon01.png',
+            name: 'attack0',
+            url: 'assets/melenchon/attack0.png',
             size: 100,
-            rotation: 10,
-            duration: 1000
+            rotation: 0,
+            duration: 200
         },
         {
-            name: 'meeting',
-            url: 'assets/melenchon/melenchon03.png',
-            size: 110,
-            rotation: 10,
-            duration: 1000
-        },
-        {
-            name: 'hearted',
-            url: 'assets/melenchon/melenchon02.png',
+            name: 'attack1',
+            url: 'assets/melenchon/attack1.png',
             size: 100,
-            rotation: -10,
-            duration: 1000
+            rotation: 0,
+            duration: 200
+        },
+        {
+            name: 'attack2',
+            url: 'assets/melenchon/attack2.png',
+            size: 100,
+            rotation: 0,
+            duration: 200
+        },
+        {
+            name: 'hurted',
+            url: 'assets/melenchon/hurted.png',
+            size: 100,
+            rotation: 0,
+            duration: 200
+        },
+        {
+            name: 'healer',
+            url: 'assets/melenchon/healer.png',
+            size: 100,
+            rotation: 0,
+            duration: 2000
         }
     ],
     actions: [
         {
-            name: 'attack1',
-            type: 'populism',
-            desc: 'populism attack',
-            damage: 4,
-            cost: 2000,
+            name: 'Eveil des consciences',
+            type: type.conviction,
+            desc: 'attaque de type politique',
+            damage: 20*1000,
+            cost: 40,
             state: 2,
-            duration: 1000
+            duration: 2000
         },
         {
-            name: 'attack2',
-            type: 'personal',
-            desc: 'personal attack',
-            damage: 50,
-            cost: 3000,
-            state: 2,
-            duration: 1000
-        },
-        {
-            name: 'attack2',
-            type: 'conviction',
-            desc: 'restore power',
-            damage: 70,
-            cost: 5000,
+            name: 'VIeme République',
+            type: type.politique,
+            desc: 'attaque de type politique',
+            damage: 30,
+            cost: 60,
             state: 3,
-            duration: 1000
+            duration: 2000
+        },
+        {
+            name: 'Punchline',
+            type: type.personnel,
+            desc: 'attaque de type politique',
+            damage: 20,
+            cost: 60,
+            state: 4,
+            duration: 2000
+        },
+        {
+            name: 'Régle verte',
+            type: type.politique,
+            desc: 'attaque de type politique',
+            damage: 30,
+            cost: 70,
+            state: 2,
+            duration: 2000
+        },
+        {
+            name: 'Indignation',
+            type: type.conviction,
+            desc: 'attaque de type politique',
+            damage: 35,
+            cost: 80,
+            state: 3,
+            duration: 2000
+        },
+        {
+            name: 'Culture et Géopolitique',
+            type: type.politique,
+            desc: 'attaque de type politique',
+            damage: 40,
+            cost: 80,
+            state: 4,
+            duration: 2000
+        },
+        {
+            name: 'soutien du peuple',
+            type: type.renforcement,
+            desc: 'Renforcement',
+            damage: 100,
+            cost: 100,
+            state: 5,
+            duration: 2000
         }
     ],
     waiting: [
@@ -81,11 +127,16 @@ module.exports = {
         }
     ],
     focus: 1,
-    hurted: 4,
-    regeneration: 5,
+    hurted: 5,
     weakness: {
-        personal: 1.2,
-        populism: 1,
-        hate: 1
+        manipulation: 1,
+        personnel: 1,
+        conviction: 1,
+        marketing: 1,
+        physique: 1,
+        politique: 1,
+        hysterie: 0.8,
+        ps: 1.2,
+        renforcement:100
     }
 };

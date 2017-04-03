@@ -32,15 +32,11 @@ var b = watchify(browserify(config.browserifyOptions));
 
 function bundle() {
     return b.bundle()
-    .on('error', gutil.log)
-    .pipe(source('app.js'))
-    .pipe(buffer())
+        .on('error', gutil.log)
+        .pipe(source('app.js'))
+        .pipe(buffer())
         //.pipe(uglify().on('error', gutil.log))
-    .pipe(gulp.dest(config.output))
-    .on('end', function() {
-        gulp.src(config.input + '/index.html')
-        .pipe(gulp.dest(config.output));
-    });
+        .pipe(gulp.dest(config.output))
 }
 
 gulp.task('watch-js', bundle);
@@ -49,16 +45,16 @@ b.on('log', gutil.log);
 
 gulp.task('build-js', () => {
     return browserify(config.browserifyOptions)
-    .transform('babelify', config.babelifyOptions)
-    .bundle()
-    .pipe(fs.createWriteStream("build/app.js"))
+        .transform('babelify', config.babelifyOptions)
+        .bundle()
+        .pipe(fs.createWriteStream("build/app.js", {defaultEncoding: 'utf8'}));
 });
 
 gulp.task('build-css', function() {
     return gulp.src(config.inputSass)
-    .pipe(sass({outputStyle: 'compressed'}))
-    .pipe(sourcemaps.write())
-    .pipe(gulp.dest(config.output));
+        .pipe(sass({outputStyle: 'compressed'}))
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest(config.output));
 });
 
 gulp.task('watch-css', function() {

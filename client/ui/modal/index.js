@@ -1,23 +1,26 @@
 module.exports = class Modal {
 
-    constructor(text, buttonLabel1, cb1, buttonLabel2, cb2) {
+    constructor(title, text, buttonLabel1, cb1, buttonLabel2, cb2) {
         this.dom = document.createElement('div');
         this.dom.className = 'modal_background';
 
         const container = document.createElement('div');
         container.className = 'modal_container';
+        if(buttonLabel2) {
+            container.className += ' v2';
+        }
         this.dom.appendChild(container);
 
 
-        const header = document.createElement('div');
-        header.className = 'modal_header';
-        container.appendChild(header);
+        const titleNode = document.createElement('div');
+        titleNode.className = 'modal_title';
+        titleNode.textContent = title;
+        container.appendChild(titleNode);
 
         const desc = document.createElement('div');
         desc.className = 'modal_desc';
         desc.textContent = text;
         container.appendChild(desc);
-
 
         const button1 = document.createElement('div');
         button1.className = buttonLabel2 ? 'modal_button right' : 'modal_button center';

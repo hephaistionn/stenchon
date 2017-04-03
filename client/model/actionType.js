@@ -1,0 +1,22 @@
+module.exports = {
+    manipulation: 0,
+    personnel: 1,
+    defense: 2,
+    conviction: 3,
+    renforcement: 4,
+    marketing: 5,
+    physique: 6,
+    politique: 7,
+    hysterie: 8,
+    ps: 9,
+    0: 'manipulation',
+    1: 'personnel',
+    2: 'defense',
+    3: 'conviction',
+    4: 'renforcement',
+    5: 'marketing',
+    6: 'physique',
+    7: 'politique',
+    8: 'hysterie',
+    9: 'ps'
+};
