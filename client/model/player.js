@@ -1,6 +1,6 @@
 const type = require('./actionType');
 module.exports = {
-    hp: 100*6,
+    hp: 100,
     power: 100,
     name: 'Mélenchon',
     slogan: 'Can\'t stenchon stop Melenchon',
@@ -60,7 +60,7 @@ module.exports = {
             name: 'Eveil des consciences',
             type: type.conviction,
             desc: 'attaque de type politique',
-            damage: 20*1000,
+            damage: 20,
             cost: 40,
             state: 2,
             duration: 2000
