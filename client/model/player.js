@@ -52,7 +52,7 @@ module.exports = {
             url: 'assets/melenchon/healer.png',
             size: 100,
             rotation: 0,
-            duration: 2000
+            duration: 200
         }
     ],
     actions: [
@@ -116,7 +116,7 @@ module.exports = {
             desc: 'Renforcement',
             damage: 100,
             cost: 100,
-            state: 5,
+            state: 6,
             duration: 2000
         }
     ],
