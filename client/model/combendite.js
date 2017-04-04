@@ -43,14 +43,14 @@ module.exports = {
             sound:'assets/kick0.wav'
         },
         {
-            name: 'Jean-Luc',
+            name: 'Tutoiement',
             type: type.manipulation,
             cost: 80,
             desc: 'Attaque de type manipulation',
             damage: 10,
             state: 1,
             probability: 0,
-            duration: 20000,
+            duration: 2000,
             sound:'assets/kick0.wav'
         }
     ],

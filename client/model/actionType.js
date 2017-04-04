@@ -1,5 +1,5 @@
 module.exports = {
-    manipulation: 0,
+    manipulation: 10,
     personnel: 1,
     defense: 2,
     conviction: 3,
@@ -9,7 +9,7 @@ module.exports = {
     politique: 7,
     hysterie: 8,
     ps: 9,
-    0: 'manipulation',
+    10: 'manipulation',
     1: 'personnel',
     2: 'defense',
     3: 'conviction',

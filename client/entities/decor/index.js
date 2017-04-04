@@ -18,9 +18,9 @@ module.exports = class Decor {
         this.fx1.className = 'fx1';
         this.dom.appendChild(this.fx1);
 
-        this.fx2 = document.createElement('div');
+        /**this.fx2 = document.createElement('div');
         this.fx2.className = 'fx2';
-        this.dom.appendChild(this.fx2);
+        this.dom.appendChild(this.fx2);*/
 
         this.tagPlayer = prepareTag('tagPlayer');
         this.tagMob0 = prepareTag('tagMob v0');
@@ -75,10 +75,10 @@ module.exports = class Decor {
     }
 
     startAtttack() {
-        this.fx2.className = 'fx2 anim';
+        /**this.fx2.className = 'fx2 anim';
         this.timerStriken = setTimeout(()=> {
             this.fx2.className = this.fx2.className.replace(' anim', '');
-        }, 1000);
+        }, 1000);*/
     }
 
 };

@@ -13,7 +13,7 @@ module.exports = {
             url: 'assets/merkel/wait.png',
             size: 100,
             rotation: 0,
-            duration: 2500,
+            duration: 2500
         },
         {
             name: 'attack0',

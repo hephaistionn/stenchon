@@ -30,6 +30,13 @@ module.exports = class Home {
         button.onclick = cb;
         container.appendChild(button);
 
+        const contact = document.createElement('a');
+        contact.className = 'contact';
+        contact.href="mailto:mgealex@yahoo.com";
+        contact.target = "_top";
+        contact.textContent = "contact";
+        container.appendChild(contact);
+
         this._down = (event)=> {
             if(event.keyCode === 13) {
                 cb();

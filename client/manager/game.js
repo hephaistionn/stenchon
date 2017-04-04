@@ -149,7 +149,7 @@ module.exports = class Manager {
     lose() {
         this.pause = true;
         this.stopLoop();
-        const modal = new Modal(modelUi.lose.title, modelUi.lose.desc, 'retry', ()=> {
+        const modal = new Modal(modelUi.lose.title, modelUi.lose.desc, 'recommencer', ()=> {
             this.remove(modal);
             this.startGame();
         });
@@ -161,10 +161,10 @@ module.exports = class Manager {
         this.stopLoop();
         const modal = new Modal(
             modelUi.victory.title, modelUi.victory.desc,
-            'retry', ()=> {
+            'recommencer', ()=> {
                 this.remove(modal);
                 this.startGame();
-            }, 'back',
+            }, 'retour',
             ()=> {
                 this.remove(modal);
                 this.goHome();
