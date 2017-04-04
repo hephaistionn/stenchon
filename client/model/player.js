@@ -77,16 +77,16 @@ module.exports = {
         {
             name: 'Punchline',
             type: type.personnel,
-            desc: 'attaque de type politique',
+            desc: 'attaque de type lyrique',
             damage: 20,
             cost: 60,
             state: 4,
             duration: 2000
         },
         {
-            name: 'Régle verte',
+            name: 'Pudeur de gazelle',
             type: type.politique,
-            desc: 'attaque de type politique',
+            desc: 'attaque de type lyrique',
             damage: 30,
             cost: 70,
             state: 2,
@@ -111,7 +111,7 @@ module.exports = {
             duration: 2000
         },
         {
-            name: 'soutien du peuple',
+            name: 'Soutien du peuple',
             type: type.renforcement,
             desc: 'Renforcement',
             damage: 100,

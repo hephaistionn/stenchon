@@ -59,6 +59,7 @@ module.exports = class Menu {
         this.container.childNodes.forEach(node=> {
             node.className = 'menu_button';
         });
+        ee.emit('play1','assets/bip.wav');
         this.container.childNodes[this.currentfocus].className = 'menu_button  focus';
     }
 

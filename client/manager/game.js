@@ -10,6 +10,7 @@ const type = require('../model/actionType');
 const modelPlayer = require('../model/player');
 const ee = require('./eventEmitter');
 const IA = require('./ia');
+const Audio = require('./audio');
 
 module.exports = class Manager {
 
@@ -34,6 +35,9 @@ module.exports = class Manager {
         this._onSelectAction = ()=> {
         };
         this.goHome();
+
+        this.audio = new Audio();
+        this.add(this.audio);
     }
 
     goHome() {

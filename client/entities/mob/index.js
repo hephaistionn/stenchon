@@ -74,6 +74,7 @@ module.exports = class Mob {
         if(!this.selectable) return;
         this.dom.className = this.dom.className.replace(' focus', '');
         this.dom.className += ' focus';
+        ee.emit('play1','assets/bip.wav');
     }
 
     blur() {
