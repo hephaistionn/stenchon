@@ -22,14 +22,13 @@ module.exports = class ATB {
     }
 
     update(value, max) {
-        value = Math.round(value);
         value = Math.min(max, value);
         if(this.value !== value) {
             this.value = value;
             const offset = this.direction ? (100 - this.value/max * 100) : (this.value/max * 100 - 100);
             this.progress.style.transform = 'translateX(' + offset + '% )';
             this.progress.className = this.value === 1 ? 'atb_value ready' : 'atb_value';
-            this.label.textContent = this.value+'MP';
+            this.label.textContent = Math.round(this.value)+'MP';
         }
     }
 
