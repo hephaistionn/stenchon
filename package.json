@@ -3,6 +3,11 @@
   "version": "1.0.0",
   "description": "Melenchon contre tous",
   "main": "server/server.js",
+  "scripts": {
+    "build": "gulp build",
+    "postinstall": "gulp build",
+    "start": "node server"
+  },
   "dependencies": {
     "babel-preset-es2015": "^6.14.0",
     "babelify": "^7.2.0",
