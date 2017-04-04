@@ -9,6 +9,7 @@ module.exports = class Home {
         const container = document.createElement('div');
         container.className = 'home_container';
         this.dom.appendChild(container);
+        this.container = container;
 
         const title = document.createElement('div');
         title.className = 'home_title';

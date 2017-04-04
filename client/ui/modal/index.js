@@ -10,6 +10,7 @@ module.exports = class Modal {
             container.className += ' v2';
         }
         this.dom.appendChild(container);
+        this.container = container;
 
 
         const titleNode = document.createElement('div');
@@ -28,6 +29,7 @@ module.exports = class Modal {
         button1.onclick = cb1;
         button1.className += ' focus';
         container.appendChild(button1);
+
 
         let button2;
         if(buttonLabel2) {

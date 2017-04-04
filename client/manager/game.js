@@ -45,6 +45,9 @@ module.exports = class Manager {
         this.clear();
         this.home = new Home(this.startGame.bind(this));
         this.add(this.home);
+
+        this.twitter = document.getElementById('twitter');
+        this.home.container.appendChild(this.twitter);
     }
 
     startGame() {
@@ -53,6 +56,8 @@ module.exports = class Manager {
         this.newPlayer();
         this.startLoop();
         this.initEvents();
+
+        this.dom.appendChild(this.twitter);
     }
 
     clear() {
@@ -153,6 +158,7 @@ module.exports = class Manager {
             this.remove(modal);
             this.startGame();
         });
+        modal.container.appendChild(this.twitter);
         this.add(modal);
     }
 
@@ -170,6 +176,8 @@ module.exports = class Manager {
                 this.goHome();
             }
         );
+
+        modal.container.appendChild(this.twitter);
 
         this.add(modal);
     }
