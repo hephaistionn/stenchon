@@ -38,6 +38,7 @@ module.exports = class Manager {
 
         this.audio = new Audio();
         this.add(this.audio);
+        ee.emit('play2','assets/music2.mp3')
     }
 
     goHome() {

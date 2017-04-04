@@ -13,13 +13,15 @@ module.exports = class AudioPlayer {
         window.pp = this.player1;
 
         ee.on('play1', url=> {
+            this.player1.pause();
             this.player1.src = url;
             this.player1.play();
         });
         ee.on('play2', url=> {
+            this.player2.pause();
             this.player2.src = url;
-            this.loop = true;
-            this.player1.play();
+            this.player2.loop = true;
+            this.player2.play();
         });
 
     }
