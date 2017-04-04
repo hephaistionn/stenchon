@@ -8,11 +8,11 @@ module.exports = {
     hp: 'Conviction',
     power:'MP',
     victory:{
-        title: 'Victoir des Insoumis',
+        title: 'Victoire des Insoumis',
         desc: 'La VI République pour le peuple par le peuple !'
     },
     lose:{
-        title: "Victoir des l'impérialisme capitaliste",
+        title: "Victoire des l'impérialisme capitaliste",
         desc: 'La dernière nation résistante vient de tomber'
     }
 }
