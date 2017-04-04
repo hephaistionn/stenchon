@@ -48,7 +48,7 @@ module.exports = class Manager {
     }
 
     startGame() {
-        ee.emit('play1','assets/begin.wav');
+        ee.emit('play3','assets/begin.wav');
         this.clear();
         this.newPlayer();
         this.startLoop();
