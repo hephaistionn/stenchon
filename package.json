@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "Melenchon contre tous",
   "main": "server/server.js",
+  "engines": {
+    "node": "4.4.0",
+    "npm": "2.14.20"
+  },
   "scripts": {
     "build": "gulp build",
     "postinstall": "gulp build",
