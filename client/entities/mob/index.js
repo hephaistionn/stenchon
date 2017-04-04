@@ -87,7 +87,7 @@ module.exports = class Mob {
 
     affected(action) {
         if(action.type === type.renforcement) {
-            this.hp += action.value;
+            this.hp += action.damage;
             this.setState(this.states[action.state]);
             this.startAnimationStriken();
         } else if(action.type === type.defense) {
