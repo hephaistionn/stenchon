@@ -93,7 +93,7 @@ module.exports = class Mob {
         } else if(action.type === type.defense) {
             if(!this.weakness.updated)
                 Object.keys(this.weakness).map((objectKey) => {
-                    this.weakness[objectKey] = this.weakness[objectKey] + 0.2;
+                    this.weakness[objectKey] = this.weakness[objectKey] - 0.2;
                 });
 
             this.weakness.updated = true;
