@@ -37,6 +37,7 @@
   .modal_button {
     position: absolute;
     background: $orange;
+    cursor: pointer;
     &:hover {
       background: $blue;
     }
