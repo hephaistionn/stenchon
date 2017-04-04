@@ -71,7 +71,7 @@ module.exports = class Decor {
             this.tagMob0.className = this.tagMob0.className.replace(' show', '');
             this.tagMob1.className = this.tagMob1.className.replace(' show', '');
             cb();
-        }, 2000);
+        }, 3500);
     }
 
     startAtttack() {

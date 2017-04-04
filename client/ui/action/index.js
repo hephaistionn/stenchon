@@ -22,6 +22,10 @@ module.exports = class Action {
         if(action.sound)
         ee.emit('play1',action.sound);
 
+        if(action.sound2)
+            ee.emit('play4',action.sound2);
+
+
         this.timerStriken = setTimeout(()=> {
             this.dom.className = 'action_ui';
         }, action.duration - 200);

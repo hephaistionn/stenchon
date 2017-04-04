@@ -94,7 +94,8 @@ module.exports = {
             cost: 70,
             state: 2,
             duration: 2000,
-            sound:'assets/special2.wav'
+            sound:'assets/special2.wav',
+            sound2:'assets/debat-pudeur-de-gazelle.mp3'
         },
         {
             name: 'Indignation',
