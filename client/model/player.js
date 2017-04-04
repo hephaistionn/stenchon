@@ -3,7 +3,7 @@ module.exports = {
     hp: 100,
     power: 100,
     name: 'Mélenchon',
-    slogan: 'Can\'t stenchon stop Melenchon',
+    slogan: 'Can\'t stenchon the Melenchon',
     states: [
         {
             name: 'wait',
