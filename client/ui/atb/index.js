@@ -2,7 +2,7 @@ const model = require('../../model/ui');
 
 module.exports = class ATB {
 
-    constructor(value, direction) {
+    constructor(value, max, direction) {
         this.dom = document.createElement('div');
         this.dom.className = 'atb_container';
 
@@ -15,19 +15,21 @@ module.exports = class ATB {
 
         const label = document.createElement('div');
         label.className = 'label';
-        label.textContent = model.power;
+        this.label = label;
         this.dom.appendChild(label);
 
-        this.update(value);
+        this.update(value, max);
     }
 
-    update(value) {
-        value = Math.min(1, value);
+    update(value, max) {
+        value = Math.round(value);
+        value = Math.min(max, value);
         if(this.value !== value) {
             this.value = value;
-            const offset = this.direction ? (100 - this.value * 100) : (this.value * 100 - 100);
+            const offset = this.direction ? (100 - this.value/max * 100) : (this.value/max * 100 - 100);
             this.progress.style.transform = 'translateX(' + offset + '% )';
             this.progress.className = this.value === 1 ? 'atb_value ready' : 'atb_value';
+            this.label.textContent = this.value+'MP';
         }
     }
 

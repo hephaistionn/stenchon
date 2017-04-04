@@ -17,7 +17,7 @@ module.exports = class Menu {
         this.actions.forEach(action => {
             const button = document.createElement('div');
             button.className = 'menu_button';
-            button.textContent = action.name;
+            button.textContent = action.name + ' '+action.cost+ 'MP' ;
             button.onclick = ()=> {
                 ee.emit('selectAction', action);
             };

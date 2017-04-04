@@ -6,7 +6,7 @@ module.exports = {
     },
     modal: {},
     hp: 'Conviction',
-    power:'Energie',
+    power:'MP',
     victory:{
         title: 'Victoir des Insoumis',
         desc: 'La VI République pour le peuple par le peuple !'

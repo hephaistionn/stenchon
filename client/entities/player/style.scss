@@ -17,6 +17,19 @@
     width: 300px;
     height: 300px;
   }
+  .damage{
+    position: absolute;
+    top: 203px;
+    left: 172px;
+    opacity: 0;
+    transition: opacity 500ms;
+    color: white;
+    font-size: 2em;
+    text-shadow: 0 0 3px red;
+    &.show{
+      opacity: 1;
+    }
+  }
 }
 
 .stricken {

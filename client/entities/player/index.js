@@ -38,8 +38,7 @@ module.exports = class Player {
         this.name = model.name;
 
         this.waiting();
-
-        this.atbUI = new ATB(this.atb);
+        this.atbUI = new ATB(this.recovery, this.recoveryDuration);
         this.dom.appendChild(this.atbUI.dom);
         this.hpUI = new HP(this.hp, this.hpMax);
         this.dom.appendChild(this.hpUI.dom);
@@ -49,6 +48,10 @@ module.exports = class Player {
         this.disabled = false;
         const nameUI = new Name(this.name);
         this.dom.appendChild(nameUI.dom);
+
+        this.damage = document.createElement('div');
+        this.damage.className = 'damage';
+        this.dom.appendChild(this.damage);
 
         this.startAnimationComing();
 
@@ -62,7 +65,9 @@ module.exports = class Player {
     }
 
     affected(action) {
+        this.damage.className = 'damage show';
         if(action.type === type.renforcement) {
+            this.damage.textContent = '+ '+action.damage+'HP';
             this.hp += action.damage;
             this.hp = Math.min(this.hpMax, this.hp);
             this.hpUI.update(this.hp, this.hpMax);
@@ -70,6 +75,7 @@ module.exports = class Player {
             this.startAnimationStriken();
         } else {
             const factor = this.weakness[type[action.type]];
+            this.damage.textContent = '- '+(factor * action.damage)+'HP';
             this.hp -= factor * action.damage;
             this.hp = Math.max(this.hp, 0);
             this.hpUI.update(this.hp, this.hpMax);
@@ -109,7 +115,7 @@ module.exports = class Player {
         this.recovery += dt / 65;
         this.recovery = Math.min(this.recoveryDuration, this.recovery);
         this.atb = this.recovery / this.recoveryDuration;
-        this.atbUI.update(this.atb);
+        this.atbUI.update(this.recovery, this.recoveryDuration);
         if(this.atb === 1 && this.ready === false) {
             this.ready = true;
             this.menu.open();
@@ -122,6 +128,7 @@ module.exports = class Player {
         this.sprite.className = this.sprite.className.replace(' stricken', '');
         this.sprite.className += ' stricken';
         this.timerStriken = setTimeout(()=> {
+            this.damage.className = 'damage';
             this.sprite.className = this.sprite.className.replace(' stricken', '');
         }, 1000);
     }

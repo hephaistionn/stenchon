@@ -1,7 +1,7 @@
 const type = require('./actionType');
 module.exports = {
     hp: 100,
-    power: 80,
+    power: 100,
     name: 'Mélenchon',
     slogan: 'Can\'t stenchon stop Melenchon',
     states: [
@@ -61,7 +61,7 @@ module.exports = {
             type: type.conviction,
             desc: 'attaque de type politique',
             damage: 20,
-            cost: 35,
+            cost: 40,
             state: 2,
             duration: 2000
         },
@@ -70,7 +70,7 @@ module.exports = {
             type: type.politique,
             desc: 'attaque de type politique',
             damage: 30,
-            cost: 45,
+            cost: 50,
             state: 3,
             duration: 2000
         },
@@ -79,7 +79,7 @@ module.exports = {
             type: type.personnel,
             desc: 'attaque de type politique',
             damage: 20,
-            cost: 50,
+            cost: 60,
             state: 4,
             duration: 2000
         },
@@ -88,7 +88,7 @@ module.exports = {
             type: type.politique,
             desc: 'attaque de type politique',
             damage: 30,
-            cost: 60,
+            cost: 70,
             state: 2,
             duration: 2000
         },
@@ -97,7 +97,7 @@ module.exports = {
             type: type.conviction,
             desc: 'attaque de type politique',
             damage: 35,
-            cost: 65,
+            cost: 80,
             state: 3,
             duration: 2000
         },
@@ -106,7 +106,7 @@ module.exports = {
             type: type.politique,
             desc: 'attaque de type politique',
             damage: 40,
-            cost: 65,
+            cost: 75,
             state: 4,
             duration: 2000
         },
@@ -115,7 +115,7 @@ module.exports = {
             type: type.renforcement,
             desc: 'Renforcement',
             damage: 100,
-            cost: 80,
+            cost: 100,
             state: 5,
             duration: 2000
         }
