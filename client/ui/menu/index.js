@@ -71,15 +71,17 @@ module.exports = class Menu {
                 this.currentfocus--;
                 this.currentfocus = Math.max(0, this.currentfocus);
                 event.preventDefault();
+                this.updateFocus();
             } else if(event.keyCode === 40) {
                 this.currentfocus++;
                 this.currentfocus = Math.min(this.currentfocus, this.actions.length - 1);
                 event.preventDefault();
-            } else if(event.keyCode === 13) {
+                this.updateFocus();
+            } else if(event.keyCode === 13 || vent.keyCode === 32) {
                 ee.emit('selectAction', this.actions[this.currentfocus]);
                 event.preventDefault();
+                this.updateFocus();
             }
-            this.updateFocus();
         };
         document.addEventListener('keydown', this._down);
     }
