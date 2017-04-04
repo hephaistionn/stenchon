@@ -222,8 +222,8 @@ module.exports = class Mob {
             this.dom.className = this.dom.className.replace(' selectable', '');
             this.selectable = false;
         };
-        ee.on('selectAction', this._onSelectAction);
-        ee.on('selectTarget', this._onSelectTarget);
+        //ee.on('selectAction', this._onSelectAction);
+        //ee.on('selectTarget', this._onSelectTarget);
     }
 
     pushAction() {
@@ -249,8 +249,8 @@ module.exports = class Mob {
 
     onRemoved() {
         clearTimeout(this.timerAnimation);
-        ee.off('selectAction', this._onSelectAction);
-        ee.off('selectTarget', this._onSelectTarget);
+        //ee.off('selectAction', this._onSelectAction);
+        //ee.off('selectTarget', this._onSelectTarget);
     }
 
 };

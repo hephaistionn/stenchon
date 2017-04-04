@@ -239,9 +239,10 @@ module.exports = class Manager {
 
         this._onSelectAction = action=> {
             if(action.type === type.renforcement || action.type === type.defense) return;
-            this.selectMob = true;
+            //this.selectMob = true;
             this.currentFocus = 0;
-            this.updateFocus();
+            ee.emit('selectTarget', this.entities[this.currentFocus + 1]);
+            //this.updateFocus();
         };
         ee.on('selectAction', this._onSelectAction);
     }

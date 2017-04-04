@@ -24,7 +24,7 @@ module.exports = class HP {
         if(this.value !== value) {
             this.value = value;
             this.hpValue.style.width = this.value/max * 100 + '%';
-            this.label.textContent = this.value+'HP';
+            this.label.textContent = Math.round(this.value)+'HP';
         }
     }
 
