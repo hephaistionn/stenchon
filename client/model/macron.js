@@ -55,8 +55,8 @@ module.exports = {
             type: type.marketing,
             cost: 60,
             desc: 'attaque de type marketing',
-            damage: 4,
-            state: 20,
+            damage: 15,
+            state: 2,
             probability: 0.65,
             duration: 2000
         },
