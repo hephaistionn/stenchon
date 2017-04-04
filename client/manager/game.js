@@ -9,7 +9,7 @@ const modelUi = require('../model/ui');
 const type = require('../model/actionType');
 const modelPlayer = require('../model/player');
 const ee = require('./eventEmitter');
-const IA = require('./IA');
+const IA = require('./ia');
 
 module.exports = class Manager {
 
