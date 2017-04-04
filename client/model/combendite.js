@@ -5,6 +5,8 @@ module.exports = {
     power: 100,
     name: 'Dany le Rouge',
     slogan: 'Trotskiste Libéral',
+    soundDead:'assets/kill0.wav',
+    sound:'assets/fight.wav',
     states: [
         {
             name: 'wait',
@@ -37,7 +39,8 @@ module.exports = {
             damage: 5,
             state: 1,
             probability: 0.4,
-            duration: 2000
+            duration: 2000,
+            sound:'assets/kick0.wav'
         },
         {
             name: 'Jean-Luc',
@@ -47,7 +50,8 @@ module.exports = {
             damage: 10,
             state: 1,
             probability: 0,
-            duration: 20000
+            duration: 20000,
+            sound:'assets/kick0.wav'
         }
     ],
     waiting: [

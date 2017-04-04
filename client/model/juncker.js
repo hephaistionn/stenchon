@@ -5,6 +5,8 @@ module.exports = {
     power:100,
     name: 'Dark Juncker',
     slogan: 'Imperator de l\'empire liberal',
+    sound:'assets/start6.wav',
+    soundDead:'assets/fatal.wav',
     states: [
         {
             name: 'wait',
@@ -44,7 +46,8 @@ module.exports = {
             damage: 32,
             state: 2,
             probability: 0.8,
-            duration: 2000
+            duration: 2000,
+            sound:'assets/kick3.wav'
         },
         {
             name: 'Lobbycratie et influence',
@@ -54,7 +57,8 @@ module.exports = {
             damage: 20,
             state: 1,
             probability: 0.45,
-            duration: 2000
+            duration: 2000,
+            sound:'assets/kick3.wav'
         },
         {
             name: 'Déstabilisation',
@@ -64,7 +68,8 @@ module.exports = {
             damage: 15,
             state: 1,
             probability: 0,
-            duration: 2000
+            duration: 2000,
+            sound:'assets/start0.wav'
         }
     ],
     waiting: [

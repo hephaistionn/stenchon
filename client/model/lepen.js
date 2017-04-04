@@ -5,6 +5,8 @@ module.exports = {
     power:100,
     name: 'Marine Serpentard',
     slogan: 'Au nom des sang-pur',
+    sound:'assets/start9.wav',
+    soundDead:'assets/kill2.wav',
     states: [
         {
             name: 'wait',
@@ -58,7 +60,8 @@ module.exports = {
             damage: 20,
             state: 1,
             probability: 0.8,
-            duration: 2000
+            duration: 2000,
+            sound:'assets/start2.wav'
         },
         {
             name: 'Immigration Massive',
@@ -68,7 +71,8 @@ module.exports = {
             damage: 20,
             state: 2,
             probability: 0.6,
-            duration: 2000
+            duration: 2000,
+            sound:'assets/kick1.wav'
         },
         {
             name: 'Virage à gauche ',
@@ -78,7 +82,8 @@ module.exports = {
             damage: 20,
             state: 1,
             probability: 0.4,
-            duration: 2000
+            duration: 2000,
+            sound:'assets/kick2.wav'
         },
         {
             name: 'Annonce apocalyptique',
@@ -88,7 +93,8 @@ module.exports = {
             damage: 15,
             state: 2,
             probability: 0,
-            duration: 2000
+            duration: 2000,
+            sound:'assets/kick2.wav'
         }
     ],
     waiting: [

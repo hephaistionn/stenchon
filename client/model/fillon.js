@@ -5,6 +5,8 @@ module.exports = {
     power:100,
     name: 'Jean François Fripon',
     slogan: 'The White Walker',
+    sound:'assets/start10.wav',
+    soundDead:'assets/kill1.wav',
     states: [
         {
             name: 'waiting',
@@ -55,10 +57,11 @@ module.exports = {
             type: type.renforcement,
             cost: 100,
             desc: 'Renforcement' ,
-            damage: 2,
+            damage: 15,
             state: 3,
             probability: 0.8,
-            duration: 2000
+            duration: 2000,
+            sound:'assets/troca.wav'
         },
         {
             name: 'Victimisation',
@@ -68,7 +71,8 @@ module.exports = {
             damage: 1.3,
             state: 1,
             probability: 0.75,
-            duration: 2000
+            duration: 2000,
+            sound:'assets/star4.wav'
         },
         {
             name: 'Annonce apocalyptique',
@@ -78,7 +82,8 @@ module.exports = {
             damage: 15,
             state: 2,
             probability: 0.5,
-            duration: 2000
+            duration: 2000,
+            sound:'assets/kick0.wav'
         },
         {
             name: 'Cupabilisation du peuple',
@@ -88,7 +93,8 @@ module.exports = {
             damage: 20,
             state: 2,
             probability: 0,
-            duration: 2000
+            duration: 2000,
+            sound:'assets/kick0.wav'
         }
     ],
     waiting: [

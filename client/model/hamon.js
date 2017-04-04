@@ -5,6 +5,8 @@ module.exports = {
     power:50,
     name: 'Benois Pignon',
     slogan: 'Le dîner de cons',
+    sound:'assets/start11.wav',
+    soundDead:'assets/kill2.wav',
     states: [
         {
             name: 'wait',
@@ -37,7 +39,8 @@ module.exports = {
             damage: 10,
             state: 1,
             probability: 0.5,
-            duration: 2000
+            duration: 2000,
+            sound:'assets/kick0.wav'
         },
         {
             name: 'Revenu Universel',
@@ -47,7 +50,8 @@ module.exports = {
             damage: 10,
             state: 1,
             probability: 0,
-            duration: 2000
+            duration: 2000,
+            sound:'assets/kick0.wav'
         }
     ],
     waiting: [

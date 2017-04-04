@@ -5,6 +5,8 @@ module.exports = {
     power:100,
     name: 'Lieutenant Macron',
     slogan: 'Marche ou crève',
+    sound:'assets/start8.wav',
+    soundDead:'assets/kill2.wav',
     states: [
         {
             name: 'wait',
@@ -58,7 +60,8 @@ module.exports = {
             damage: 15,
             state: 2,
             probability: 0.65,
-            duration: 2000
+            duration: 2000,
+            sound:'assets/sepcial1.wav'
         },
         {
             name: 'Je suis d\'accord',
@@ -68,7 +71,8 @@ module.exports = {
             damage: 10,
             state: 1,
             probability: 0.5,
-            duration: 2000
+            duration: 2000,
+            sound:'assets/kick1.wav'
         },
         {
             name: 'C\'est notre projet !!!',
@@ -78,7 +82,8 @@ module.exports = {
             damage: 10,
             state: 2,
             probability: 0.3,
-            duration: 2000
+            duration: 2000,
+            sound:'assets/kick1.wav'
         },
         {
             name: 'Ni droite, ni gauche, juste libéral',
@@ -88,7 +93,8 @@ module.exports = {
             damage: 20,
             state: 1,
             probability: 0,
-            duration: 2000
+            duration: 2000,
+            sound:'assets/kick1.wav'
         }
     ],
     waiting: [

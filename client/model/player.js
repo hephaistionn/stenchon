@@ -63,7 +63,8 @@ module.exports = {
             damage: 20,
             cost: 40,
             state: 2,
-            duration: 2000
+            duration: 2000,
+            sound:'assets/kick0.wav'
         },
         {
             name: 'VIeme République',
@@ -72,7 +73,8 @@ module.exports = {
             damage: 30,
             cost: 50,
             state: 3,
-            duration: 2000
+            duration: 2000,
+            sound:'assets/kick1.wav'
         },
         {
             name: 'Punchline',
@@ -81,7 +83,8 @@ module.exports = {
             damage: 20,
             cost: 60,
             state: 4,
-            duration: 2000
+            duration: 2000,
+            sound:'assets/kick2.wav'
         },
         {
             name: 'Pudeur de gazelle',
@@ -90,7 +93,8 @@ module.exports = {
             damage: 30,
             cost: 70,
             state: 2,
-            duration: 2000
+            duration: 2000,
+            sound:'assets/special2.wav'
         },
         {
             name: 'Indignation',
@@ -99,7 +103,8 @@ module.exports = {
             damage: 35,
             cost: 80,
             state: 3,
-            duration: 2000
+            duration: 2000,
+            sound:'assets/kick1.wav'
         },
         {
             name: 'Culture et Géopolitique',
@@ -108,7 +113,8 @@ module.exports = {
             damage: 40,
             cost: 75,
             state: 4,
-            duration: 2000
+            duration: 2000,
+            sound:'assets/kick3.wav'
         },
         {
             name: 'Soutien du peuple',
@@ -117,7 +123,8 @@ module.exports = {
             damage: 100,
             cost: 100,
             state: 6,
-            duration: 2000
+            duration: 2000,
+            sound:'assets/start7.wav'
         }
     ],
     waiting: [

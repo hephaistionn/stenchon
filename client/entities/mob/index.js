@@ -32,6 +32,8 @@ module.exports = class Mob {
         this.dom.appendChild(pointer);
 
         this.initEvents();
+        if(model.sound)
+        ee.emit('play1', model.sound);
 
         this.currentState = null;
         this.timer = 0;
@@ -51,6 +53,7 @@ module.exports = class Mob {
         this.currentTarget = null;
         this.selectable = false;
         this.disabled = false;
+        this.soundDead = model.soundDead;
         this.name = model.name;
 
         this.waiting();
@@ -74,7 +77,6 @@ module.exports = class Mob {
         if(!this.selectable) return;
         this.dom.className = this.dom.className.replace(' focus', '');
         this.dom.className += ' focus';
-        ee.emit('play1','assets/bip.wav');
     }
 
     blur() {
@@ -192,6 +194,10 @@ module.exports = class Mob {
 
     destroy() {
         this.disabled = true;
+        if(this.soundDead)
+            ee.emit('play3', this.soundDead);
+
+
         this.timerAnimation = setTimeout(()=> {
             this.startAnimationDestroy(()=> {
                 ee.emit('destroy', this);

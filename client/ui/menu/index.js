@@ -27,6 +27,7 @@ module.exports = class Menu {
                     node.className = 'menu_button';
                 });
                 button.className = 'menu_button focus';
+                ee.emit('play1','assets/bip.wav');
             };
 
             const pointer = document.createElement('div');

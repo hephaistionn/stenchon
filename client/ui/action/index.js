@@ -1,3 +1,5 @@
+const ee = require('../../manager/eventEmitter');
+
 module.exports = class Action {
 
     constructor() {
@@ -17,6 +19,9 @@ module.exports = class Action {
         this.actionName.textContent = action.name;
         this.actionDesc.textContent = action.desc;
         this.dom.className += ' show';
+        if(action.sound)
+        ee.emit('play1',action.sound);
+
         this.timerStriken = setTimeout(()=> {
             this.dom.className = 'action_ui';
         }, action.duration - 200);

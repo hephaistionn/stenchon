@@ -5,13 +5,15 @@ module.exports = {
     power:100,
     name: 'Angela',
     slogan: 'L\'Ordre Teutonique Liberal',
+    sound:'assets/start5.wav',
+    soundDead:'assets/kill1.wav',
     states: [
         {
             name: 'wait',
             url: 'assets/merkel/wait.png',
             size: 100,
             rotation: 0,
-            duration: 2500
+            duration: 2500,
         },
         {
             name: 'attack0',
@@ -44,7 +46,8 @@ module.exports = {
             damage: 40,
             state: 2,
             probability: 0.8,
-            duration: 2000
+            duration: 2000,
+            sound:'assets/kick3.wav'
         },
         {
             name: 'Négociation unilaterale',
@@ -54,7 +57,8 @@ module.exports = {
             damage: 18,
             state: 2,
             probability: 0.4,
-            duration: 2000
+            duration: 2000,
+            sound:'assets/kick1.wav'
         },
         {
             name: 'Lobbycratie et influence',
@@ -64,7 +68,8 @@ module.exports = {
             damage: 15,
             state: 1,
             probability: 0,
-            duration: 2000
+            duration: 2000,
+            sound:'assets/kick1.wav'
         }
     ],
     waiting: [
