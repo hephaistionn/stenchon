@@ -41,7 +41,7 @@ module.exports = class Player {
 
         this.atbUI = new ATB(this.atb);
         this.dom.appendChild(this.atbUI.dom);
-        this.hpUI = new HP(this.hp);
+        this.hpUI = new HP(this.hp, this.hpMax);
         this.dom.appendChild(this.hpUI.dom);
         this.menu = new Menu(model);
         this.dom.appendChild(this.menu.dom);
@@ -65,14 +65,14 @@ module.exports = class Player {
         if(action.type === type.renforcement) {
             this.hp += action.damage;
             this.hp = Math.min(this.hpMax, this.hp);
-            this.hpUI.update(this.hp / this.hpMax);
+            this.hpUI.update(this.hp, this.hpMax);
             this.setState(this.states[action.state]);
             this.startAnimationStriken();
         } else {
             const factor = this.weakness[type[action.type]];
             this.hp -= factor * action.damage;
             this.hp = Math.max(this.hp, 0);
-            this.hpUI.update(this.hp / this.hpMax);
+            this.hpUI.update(this.hp, this.hpMax);
             this.startAnimationStriken();
             this.setState(this.states[this.hurtedState]);
             if(this.hp < 1) {
@@ -106,7 +106,7 @@ module.exports = class Player {
         }
         this.timer += dt;
         if(this.currentAction) return;
-        this.recovery += dt / 100;
+        this.recovery += dt / 65;
         this.recovery = Math.min(this.recoveryDuration, this.recovery);
         this.atb = this.recovery / this.recoveryDuration;
         this.atbUI.update(this.atb);

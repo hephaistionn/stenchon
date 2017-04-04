@@ -57,7 +57,7 @@ module.exports = class Mob {
 
         this.atbUI = new ATB(this.atb, true);
         this.dom.appendChild(this.atbUI.dom);
-        this.hpUI = new HP(this.hp);
+        this.hpUI = new HP(this.hp, this.hpMax);
         this.dom.appendChild(this.hpUI.dom);
         const nameUI = new Name(this.name);
         this.dom.appendChild(nameUI.dom);
@@ -103,7 +103,7 @@ module.exports = class Mob {
             const factor = this.weakness[type[action.type]];
             this.hp -= factor * action.damage;
             this.hp = Math.max(this.hp, 0);
-            this.hpUI.update(this.hp / this.hpMax);
+            this.hpUI.update(this.hp, this.hpMax);
             this.startAnimationStriken();
             this.setState(this.states[this.hurtedState]);
             if(this.hp < 1) {

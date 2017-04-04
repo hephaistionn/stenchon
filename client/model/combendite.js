@@ -34,7 +34,7 @@ module.exports = {
             type: type.personnel,
             cost: 80,
             desc: 'Attaque de type personnel',
-            damage: 0,
+            damage: 5,
             state: 1,
             probability: 0.4,
             duration: 2000
@@ -44,7 +44,7 @@ module.exports = {
             type: type.manipulation,
             cost: 80,
             desc: 'Attaque de type manipulation',
-            damage: 1,
+            damage: 10,
             state: 1,
             probability: 0,
             duration: 20000
