@@ -36,6 +36,14 @@ module.exports = class Home {
         urlsite.textContent = 'www.stenchon.fr';
         container.appendChild(urlsite);
 
+        const share = document.createElement('a');
+        share.className = 'home_share';
+        share.innerHTML = '<div class="fb-share-button" data-href="http://www.stenchon.fr/" data-layout="button" data-size="small" data-mobile-iframe="false"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.stenchon.fr%2F&amp;src=sdkpreparse">Partager</a></div>';
+        container.appendChild(share);
+
+
+
+
         const contact = document.createElement('a');
         contact.className = 'contact';
         contact.href="mailto:mgealex@yahoo.com";

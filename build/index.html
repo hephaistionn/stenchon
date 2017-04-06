@@ -6,6 +6,11 @@
     <title>Melenchon Battle</title>
     <script src="app.js"></script>
     <link rel="stylesheet" href="app.css">
+    <meta property="og:url"           content="http://www.stenchon.fr/" />
+    <meta property="og:type"          content="game" />
+    <meta property="og:title"         content="La Bataille Des insoumis" />
+    <meta property="og:description"   content="Résister à l'impérialisme libéral à coup de punchlines sanglantes !" />
+    <meta property="og:image"         content="http://www.stenchon.fr/assets/victory.jpg" />
     <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
                     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -15,11 +20,19 @@
         ga('create', 'UA-66925953-2', 'auto');
         ga('send', 'pageview');
     </script>
+    <script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.8&appId=498098093690596";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
 </head>
 <body >
 <div id="twitter">
     <a href="https://twitter.com/intent/tweet?button_hashtag=PunchCommeMelenchon" class="twitter-hashtag-button" data-related="hephaistionn">Tweet #PunchCommeMelenchon</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 </div>
+<div id="fb-root"></div>
 <div id="game"></div>
 </body>
 </html>
