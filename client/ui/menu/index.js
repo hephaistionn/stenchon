@@ -60,7 +60,6 @@ module.exports = class Menu {
         this.container.childNodes.forEach(node=> {
             node.className = 'menu_button';
         });
-        ee.emit('play4','assets/bip.wav');
         this.container.childNodes[this.currentfocus].className = 'menu_button  focus';
     }
 
@@ -68,16 +67,23 @@ module.exports = class Menu {
         this.currentfocus = 0;
         this._down = (event)=> {
             if(event.keyCode === 38) {
+                if(this.currentfocus !== 0){
+                    ee.emit('play4','assets/bip.wav');
+                }
                 this.currentfocus--;
                 this.currentfocus = Math.max(0, this.currentfocus);
                 event.preventDefault();
                 this.updateFocus();
             } else if(event.keyCode === 40) {
+                if(this.currentfocus !== this.actions.length - 1){
+                    ee.emit('play4','assets/bip.wav');
+                }
                 this.currentfocus++;
                 this.currentfocus = Math.min(this.currentfocus, this.actions.length - 1);
                 event.preventDefault();
                 this.updateFocus();
             } else if(event.keyCode === 13 || vent.keyCode === 32) {
+                ee.emit('play4','assets/bip.wav');
                 ee.emit('selectAction', this.actions[this.currentfocus]);
                 event.preventDefault();
                 this.updateFocus();

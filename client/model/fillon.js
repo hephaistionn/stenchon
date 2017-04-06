@@ -56,7 +56,7 @@ module.exports = {
             name: 'Trocadero',
             type: type.renforcement,
             cost: 100,
-            desc: 'Renforcement' ,
+            desc: 'Régénération' ,
             damage: 15,
             state: 3,
             probability: 0.8,

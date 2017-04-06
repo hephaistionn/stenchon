@@ -39,7 +39,7 @@ module.exports = {
     ],
     actions: [
         {
-            name: 'chantage à la dette',
+            name: 'Chantage à la dette',
             type: type.manipulation,
             cost: 90,
             desc: 'Attaque de type manipulation',

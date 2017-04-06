@@ -118,6 +118,7 @@ module.exports = class Player {
         this.atbUI.update(this.recovery, this.recoveryDuration);
         if(this.atb === 1 && this.ready === false) {
             this.ready = true;
+            ee.emit('play4','assets/open.mp3');
             this.menu.open();
         }
 

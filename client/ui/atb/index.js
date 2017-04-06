@@ -1,4 +1,5 @@
 const model = require('../../model/ui');
+const ee = require('../../manager/eventEmitter');
 
 module.exports = class ATB {
 
@@ -24,6 +25,7 @@ module.exports = class ATB {
     update(value, max) {
         value = Math.min(max, value);
         if(this.value !== value) {
+
             this.value = value;
             const offset = this.direction ? (100 - this.value/max * 100) : (this.value/max * 100 - 100);
             this.progress.style.transform = 'translateX(' + offset + '% )';

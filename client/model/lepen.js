@@ -56,7 +56,7 @@ module.exports = {
             name: 'Victimisation',
             type: type.renforcement,
             cost: 50,
-            desc: 'Renforcement',
+            desc: 'Régénération',
             damage: 20,
             state: 1,
             probability: 0.8,
