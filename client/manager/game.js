@@ -167,6 +167,7 @@ module.exports = class Manager {
 
     lose() {
         this.pause = true;
+        this.backButton.style.display  = 'none';
         this.stopLoop();
         const modal = new Modal(modelUi.lose.title, modelUi.lose.desc, 'Retry', ()=> {
             this.remove(modal);
@@ -178,6 +179,7 @@ module.exports = class Manager {
 
     win() {
         this.pause = true;
+        this.backButton.style.display  = 'none';
         this.stopLoop();
         const modal = new Modal(
             modelUi.victory.title, modelUi.victory.desc,
