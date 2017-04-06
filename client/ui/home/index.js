@@ -38,10 +38,6 @@ module.exports = class Home {
         contact.textContent = "contact";
         container.appendChild(contact);
 
-        const twitter = document.getElementById('twitter');
-        twitter.className = 'twitter';
-        container.appendChild(twitter);
-
         this._down = (event)=> {
             if(event.keyCode === 13) {
                 cb();

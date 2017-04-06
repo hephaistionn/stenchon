@@ -34,25 +34,39 @@ module.exports = class Manager {
         };
         this._onSelectAction = ()=> {
         };
-        this.goHome();
+
 
         this.audio = new Audio();
         this.add(this.audio);
         ee.emit('play2','assets/music2.mp3')
+
+        const backButton = document.createElement('div');
+        backButton.className = 'button_back';
+        backButton.onclick = ()=>{
+            this.goHome();
+        };
+        backButton.textContent  = 'Retour';
+        this.backButton = backButton;
+        this.dom.appendChild(backButton);
+        this.goHome();
     }
 
     goHome() {
         this.clear();
+        this.backButton.style.display  = 'none';
         this.home = new Home(this.startGame.bind(this));
         this.add(this.home);
 
         this.twitter = document.getElementById('twitter');
+        this.twitter.className = 'twitter';
         this.home.container.appendChild(this.twitter);
     }
 
     startGame() {
         ee.emit('play3','assets/begin.wav');
+        this.pause = false;
         this.clear();
+        this.backButton.style.display  = 'block';
         this.newPlayer();
         this.startLoop();
         this.initEvents();

@@ -50,6 +50,21 @@ body {
   }
 }
 
+.button_back{
+  position: fixed;
+  top: 0;
+  right: 50px;
+  margin: 7px;
+  height: 30px;
+  border: solid $orange 5px;
+  cursor: pointer;
+  background-color: white;
+  border-radius: 20px;
+  line-height: 30px;
+  padding: 0px 8px;
+  font-weight: bold;
+}
+
 @import "./entities/mob/style";
 @import "./entities/player/style";
 @import "./entities/decor/style";
