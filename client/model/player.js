@@ -59,62 +59,62 @@ module.exports = {
         {
             name: 'Eveil des consciences',
             type: type.conviction,
-            desc: 'attaque de type politique',
+            desc: 'Attaque de type politique',
             damage: 20,
             cost: 40,
             state: 2,
-            duration: 2000,
+            duration: 3000,
             sound:'assets/kick0.wav'
         },
         {
             name: 'VIeme République',
             type: type.politique,
-            desc: 'attaque de type politique',
+            desc: 'Attaque de type politique',
             damage: 30,
             cost: 50,
             state: 3,
-            duration: 2000,
+            duration: 3000,
             sound:'assets/kick1.wav'
         },
         {
             name: 'Punchline',
             type: type.personnel,
-            desc: 'attaque de type lyrique',
+            desc: 'Attaque de type lyrique',
             damage: 20,
             cost: 60,
             state: 4,
-            duration: 2000,
+            duration: 3000,
             sound:'assets/kick2.wav'
         },
         {
             name: 'Pudeur de gazelle',
             type: type.politique,
-            desc: 'attaque de type lyrique',
+            desc: 'Attaque de type lyrique',
             damage: 30,
             cost: 70,
             state: 2,
-            duration: 2000,
+            duration: 3000,
             sound:'assets/special2.wav',
             sound2:'assets/debat-pudeur-de-gazelle.mp3'
         },
         {
             name: 'Indignation',
             type: type.conviction,
-            desc: 'attaque de type politique',
+            desc: 'Attaque de type politique',
             damage: 35,
             cost: 80,
             state: 3,
-            duration: 2000,
+            duration: 3000,
             sound:'assets/kick1.wav'
         },
         {
             name: 'Culture et Géopolitique',
             type: type.politique,
-            desc: 'attaque de type politique',
+            desc: 'Attaque de type politique',
             damage: 40,
             cost: 75,
             state: 4,
-            duration: 2000,
+            duration: 3000,
             sound:'assets/kick3.wav'
         },
         {
@@ -124,7 +124,7 @@ module.exports = {
             damage: 100,
             cost: 100,
             state: 6,
-            duration: 2000,
+            duration: 3000,
             sound:'assets/start7.wav'
         }
     ],

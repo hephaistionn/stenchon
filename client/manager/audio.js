@@ -6,6 +6,19 @@ module.exports = class AudioPlayer {
         this.dom = document.createElement('div');
         this.dom.className = 'audio';
 
+        const button = document.createElement('div');
+        button.className = 'sound_button';
+        button.onclick = () => {
+            if(this.player2.paused){
+                this.player2.play();
+                button.className = 'sound_button';
+            }else{
+                this.player2.pause();
+                button.className = 'sound_button active';
+            }
+        };
+        this.dom.appendChild(button);
+
         this.player1 = new Audio();
 
         this.player2 = new Audio();
@@ -21,7 +34,7 @@ module.exports = class AudioPlayer {
         ee.on('play2', url=> {
             this.player2.src = url;
             this.player2.loop = true;
-            this.player2.volume = 0.3;
+            this.player2.volume = 0.2;
             this.player2.play();
         });
 

@@ -28,7 +28,7 @@ module.exports = class Action {
 
         this.timerStriken = setTimeout(()=> {
             this.dom.className = 'action_ui';
-        }, action.duration - 200);
+        }, action.duration);
     }
 
 };

@@ -32,14 +32,14 @@ module.exports = {
     ],
     actions: [
         {
-            name: 'photocopie de programme',
+            name: 'Plagiat',
             type: type.marketing,
             cost: 45,
             desc: 'Attaque de type marketing',
             damage: 10,
             state: 1,
             probability: 0.5,
-            duration: 2000,
+            duration: 3000,
             sound:'assets/kick0.wav'
         },
         {
@@ -50,7 +50,7 @@ module.exports = {
             damage: 10,
             state: 1,
             probability: 0,
-            duration: 2000,
+            duration: 3000,
             sound:'assets/kick0.wav'
         }
     ],

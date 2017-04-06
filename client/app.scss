@@ -31,6 +31,24 @@ body {
   padding: 0;
 }
 
+.sound_button{
+  position: fixed;
+  top: 0;
+  right: 0;
+  margin: 7px;
+  width: 30px;
+  height: 30px;
+  background-image: url(assets/background/music-note-icon.png);
+  background-repeat: no-repeat;
+  background-size: 100%;
+  cursor: pointer;
+  background-color: white;
+  border-radius: 14px;
+  &.active{
+    background-color: $orange;
+  }
+}
+
 @import "./entities/mob/style";
 @import "./entities/player/style";
 @import "./entities/decor/style";

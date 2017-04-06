@@ -39,7 +39,7 @@ module.exports = {
             damage: 5,
             state: 1,
             probability: 0.4,
-            duration: 2000,
+            duration: 3000,
             sound:'assets/kick0.wav'
         },
         {
@@ -50,7 +50,7 @@ module.exports = {
             damage: 10,
             state: 1,
             probability: 0,
-            duration: 2000,
+            duration: 3000,
             sound:'assets/kick0.wav'
         }
     ],

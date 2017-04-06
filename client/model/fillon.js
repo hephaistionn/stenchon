@@ -71,7 +71,7 @@ module.exports = {
             damage: 1.3,
             state: 1,
             probability: 0.75,
-            duration: 2000,
+            duration: 3000,
             sound:'assets/star4.wav'
         },
         {
@@ -82,7 +82,7 @@ module.exports = {
             damage: 15,
             state: 2,
             probability: 0.5,
-            duration: 2000,
+            duration: 3000,
             sound:'assets/kick0.wav'
         },
         {
@@ -93,7 +93,7 @@ module.exports = {
             damage: 20,
             state: 2,
             probability: 0,
-            duration: 2000,
+            duration: 3000,
             sound:'assets/kick0.wav'
         }
     ],

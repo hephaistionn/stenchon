@@ -112,7 +112,7 @@ module.exports = class Player {
         }
         this.timer += dt;
         if(this.currentAction) return;
-        this.recovery += dt / 65;
+        this.recovery += dt / 50;
         this.recovery = Math.min(this.recoveryDuration, this.recovery);
         this.atb = this.recovery / this.recoveryDuration;
         this.atbUI.update(this.recovery, this.recoveryDuration);
