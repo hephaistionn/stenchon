@@ -1,9 +1,8 @@
 .menu_container {
   position: absolute;
   background: $orange;
-  width: 350px;
-  bottom: 46px;
-  left: 99%;
+  bottom: 90px;
+  left: 79%;
   z-index: 1;
   display: none;
   .menu_button {
@@ -11,10 +10,10 @@
     color: white;
     cursor: pointer;
     height: 36px;
-    font-size: 21px;
+    font-size: 16px;
     margin: 0px 5px;
     line-height: 36px;
-    border-bottom: solid;
+    border-bottom: solid 2px;
     white-space: nowrap;
     &.focus {
       background-color: $blue;
@@ -22,11 +21,14 @@
         display: block;
       }
     }
+    &:last-child{
+      border: none;
+    }
     .pointer {
       display: none;
       position: relative;
-      left: -60px;
-      top: -44px;
+      left: -46px;
+      top: -35px;
     }
 
   }
@@ -41,8 +43,8 @@
 }
 
 .pointer {
-  width: 50px;
-  height: 50px;
+  width: 33px;
+  height: 33px;
   animation-name: blind;
   animation-duration: 500ms;
   animation-iteration-count: infinite;

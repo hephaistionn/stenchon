@@ -21,7 +21,7 @@ body {
 
 #game {
   position: fixed;
-  background-color: #654e2d;
+  background-color: $orange;
   background-image: url(assets/background/gamebackground3.jpg);
   background-repeat: no-repeat;
   background-size: 100%;
@@ -38,12 +38,13 @@ body {
   margin: 7px;
   width: 30px;
   height: 30px;
+  border: solid $orange 5px;
   background-image: url(assets/background/music-note-icon.png);
   background-repeat: no-repeat;
   background-size: 100%;
   cursor: pointer;
   background-color: white;
-  border-radius: 14px;
+  border-radius: 20px;
   &.active{
     background-color: $orange;
   }

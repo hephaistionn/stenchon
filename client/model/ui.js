@@ -1,7 +1,7 @@
 module.exports = {
     home: {
         buttonLabel: 'Start',
-        description: "Résister à l'impérialisme libéral",
+        description: "Résister à l'impérialisme libéral à coup de punchlines sanglantes !",
         title: 'La Bataille Des insoumis'
     },
     modal: {},
