@@ -31,6 +31,11 @@ module.exports = class Home {
         button.onclick = cb;
         container.appendChild(button);
 
+        const urlsite = document.createElement('div');
+        urlsite.className = 'home_url';
+        urlsite.textContent = 'www.stenchon.fr';
+        container.appendChild(urlsite);
+
         const contact = document.createElement('a');
         contact.className = 'contact';
         contact.href="mailto:mgealex@yahoo.com";

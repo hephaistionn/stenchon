@@ -76,7 +76,7 @@
 
 .destroyed {
   animation-name: destroyed;
-  animation-duration: 1s;
+  animation-duration: 1.5s;
   animation-iteration-count: 1;
   transition: transform 1000ms;
 }
@@ -86,7 +86,7 @@
     transform: translate(20%, -10%);
   }
   100% {
-    transform: translate(20%, 200%);
+    transform: translate(20%, 250%);
   }
 }
 
