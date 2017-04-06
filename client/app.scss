@@ -65,6 +65,36 @@ body {
   font-weight: bold;
 }
 
+.button_pause{
+  position: fixed;
+  top: 0;
+  right: 138px;
+  margin: 7px;
+  height: 30px;
+  border: solid $orange 5px;
+  cursor: pointer;
+  background-color: white;
+  border-radius: 20px;
+  line-height: 30px;
+  padding: 0px 8px;
+  font-weight: bold;
+}
+
+.pauseOverflow{
+  position: absolute;
+  background-color: $background;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  z-index: 2;
+  padding: 21% 50%;
+  color: white;
+  font-size: 2em;
+  cursor: pointer;
+}
+
+
+
 @import "./entities/mob/style";
 @import "./entities/player/style";
 @import "./entities/decor/style";

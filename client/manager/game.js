@@ -24,6 +24,7 @@ module.exports = class Manager {
         this.selectMob = false;
         this.ia = new IA();
         this.pause = false;
+        this.playerPause = false;
         this._onPushAction = ()=> {
         };
         this._onDestroy = ()=> {
@@ -48,12 +49,33 @@ module.exports = class Manager {
         backButton.textContent  = 'Retour';
         this.backButton = backButton;
         this.dom.appendChild(backButton);
+
+        const pauseButton = document.createElement('div');
+        pauseButton.className = 'button_pause';
+        pauseButton.textContent  = 'Pause';
+        this.pauseButton = pauseButton;
+        pauseButton.onclick = ()=>{
+            this.setPause();
+        };
+        this.dom.appendChild(pauseButton);
+
+        this.pauseOverflow = document.createElement('div');
+        this.pauseOverflow.className = 'pauseOverflow';
+        this.pauseOverflow.textContent  = 'Pause';
+        this.pauseOverflow.onclick = ()=>{
+            this.setPause();
+        };
+        this.dom.appendChild(this.pauseOverflow);
+        this.pauseOverflow.style.display = 'none';
+
+
         this.goHome();
     }
 
     goHome() {
         this.clear();
         this.backButton.style.display  = 'none';
+        this.pauseButton.style.display  = 'none';
         this.home = new Home(this.startGame.bind(this));
         this.add(this.home);
 
@@ -65,8 +87,10 @@ module.exports = class Manager {
     startGame() {
         ee.emit('play3','assets/begin.wav');
         this.pause = false;
+        this.playerPause = false;
         this.clear();
         this.backButton.style.display  = 'block';
+        this.pauseButton.style.display  = 'block';
         this.newPlayer();
         this.startLoop();
         this.initEvents();
@@ -96,7 +120,7 @@ module.exports = class Manager {
     }
 
     loop(dt) {
-        if(this.pause) return;
+        if(this.pause || this.playerPause) return;
         this.spawner();
         for(let i = 0; i < this.entities.length; i++) {
             this.entities[i].update(dt);
@@ -168,6 +192,7 @@ module.exports = class Manager {
     lose() {
         this.pause = true;
         this.backButton.style.display  = 'none';
+        this.pauseButton.style.display  = 'none';
         this.stopLoop();
         const modal = new Modal(modelUi.lose.title, modelUi.lose.desc, 'Retry', ()=> {
             this.remove(modal);
@@ -177,9 +202,24 @@ module.exports = class Manager {
         this.add(modal);
     }
 
+    setPause() {
+        if(this.playerPause === true){
+            this.playerPause = false;
+            this.pauseOverflow.style.display = 'none';
+            this.backButton.style.display  = 'block';
+            this.pauseButton.style.display  = 'block';
+        }else{
+            this.playerPause = true;
+            this.pauseOverflow.style.display = 'block';
+            this.backButton.style.display  = 'none';
+            this.pauseButton.style.display  = 'none';
+        }
+    }
+
     win() {
         this.pause = true;
         this.backButton.style.display  = 'none';
+        this.pauseButton.style.display  = 'none';
         this.stopLoop();
         const modal = new Modal(
             modelUi.victory.title, modelUi.victory.desc,

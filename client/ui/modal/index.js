@@ -44,6 +44,7 @@ module.exports = class Modal {
 
         this._down = (event)=> {
             button1.className = button1.className.replace(' focus', '');
+            if(button2)
             button2.className = button2.className.replace(' focus', '');
             if(event.keyCode === 13) {
                 this.currentButton ? cb2() : cb1();

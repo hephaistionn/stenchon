@@ -45,7 +45,7 @@ module.exports = {
             desc: 'Attaque de type physique',
             damage: 32,
             state: 2,
-            probability: 0.8,
+            probability: 0.90,
             duration: 3000,
             sound:'assets/kick3.wav'
         },
@@ -56,7 +56,18 @@ module.exports = {
             desc: 'Attaque de type politique',
             damage: 20,
             state: 1,
-            probability: 0.45,
+            probability: 0.66,
+            duration: 3000,
+            sound:'assets/kick3.wav'
+        },
+        {
+            name: 'Evasion fiscale',
+            type: type.physique,
+            cost: 50,
+            desc: 'Attaque de type physique',
+            damage: 20,
+            state: 1,
+            probability: 0.33,
             duration: 3000,
             sound:'assets/kick3.wav'
         },
