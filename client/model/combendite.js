@@ -1,7 +1,7 @@
 const type = require('./actionType');
 
 module.exports = {
-    hp: 50,
+    hp: 40,
     power: 100,
     name: 'Dany le Rouge',
     slogan: 'Trotskiste Libéral',
