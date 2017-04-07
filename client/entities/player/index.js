@@ -25,7 +25,7 @@ module.exports = class Player {
 
         this.timer = 0;
         this.recoveryDuration = model.power;
-        this.recovery = Math.random() * this.recoveryDuration;
+        this.recovery = 0.9 * this.recoveryDuration;
         this.hp = model.hp;
         this.atb = this.recovery / this.recoveryDuration;
         this.hpMax = model.hp;
