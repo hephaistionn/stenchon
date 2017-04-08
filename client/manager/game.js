@@ -39,7 +39,6 @@ module.exports = class Manager {
 
         this.audio = new Audio();
         this.add(this.audio);
-        ee.emit('play2','assets/music2.mp3')
 
         const backButton = document.createElement('div');
         backButton.className = 'button_back';
@@ -68,7 +67,6 @@ module.exports = class Manager {
         this.dom.appendChild(this.pauseOverflow);
         this.pauseOverflow.style.display = 'none';
 
-
         this.goHome();
     }
 
@@ -76,12 +74,15 @@ module.exports = class Manager {
         this.clear();
         this.backButton.style.display  = 'none';
         this.pauseButton.style.display  = 'none';
-        this.home = new Home(this.startGame.bind(this));
-        this.add(this.home);
-
-        this.twitter = document.getElementById('twitter');
-        this.twitter.className = 'twitter';
-        this.home.container.appendChild(this.twitter);
+        if(!this.home) {
+            this.home = new Home(this.startGame.bind(this));
+            this.add(this.home);
+            this.twitter = document.getElementById('twitter');
+            this.twitter.className = 'twitter';
+            this.home.container.appendChild(this.twitter);
+        }
+        this.home.dom.style.display = 'block';
+        ee.emit('play2','assets/music2.mp3', true);
     }
 
     startGame() {
@@ -94,8 +95,7 @@ module.exports = class Manager {
         this.newPlayer();
         this.startLoop();
         this.initEvents();
-
-        this.dom.appendChild(this.twitter);
+        ee.emit('play2','assets/music2.mp3', true);
     }
 
     clear() {
@@ -109,12 +109,11 @@ module.exports = class Manager {
         this.busy = false;
         this.currentFocus = 0;
         if(this.home)
-            this.remove(this.home);
+            this.home.dom.style.display = 'none';
         if(this.decor)
             this.remove(this.decor);
         if(this.action_ui)
             this.remove(this.action_ui);
-        this.home = null;
         this.decor = null;
         this.action_ui = null;
     }
@@ -190,6 +189,7 @@ module.exports = class Manager {
     }
 
     lose() {
+        ee.emit('play2','assets/lose.mp3', false);
         this.pause = true;
         this.backButton.style.display  = 'none';
         this.pauseButton.style.display  = 'none';
@@ -198,7 +198,6 @@ module.exports = class Manager {
             this.remove(modal);
             this.startGame();
         });
-        modal.container.appendChild(this.twitter);
         this.add(modal);
     }
 
@@ -217,6 +216,7 @@ module.exports = class Manager {
     }
 
     win() {
+        ee.emit('play2','assets/win.mp3', false);
         this.pause = true;
         this.backButton.style.display  = 'none';
         this.pauseButton.style.display  = 'none';
@@ -232,9 +232,6 @@ module.exports = class Manager {
                 this.goHome();
             }
         );
-
-        modal.container.appendChild(this.twitter);
-
         this.add(modal);
     }
 

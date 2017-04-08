@@ -31,9 +31,9 @@ module.exports = class AudioPlayer {
             this.player1.src = url;
             this.player1.play();
         });
-        ee.on('play2', url=> {
+        ee.on('play2', (url, loop)=> {
             this.player2.src = url;
-            this.player2.loop = true;
+            this.player2.loop = loop;
             this.player2.volume = 0.2;
             this.player2.play();
         });
