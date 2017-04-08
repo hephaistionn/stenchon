@@ -35,7 +35,7 @@ function bundle() {
         .on('error', gutil.log)
         .pipe(source('app.js'))
         .pipe(buffer())
-        //.pipe(uglify().on('error', gutil.log))
+        .pipe(uglify().on('error', gutil.log))
         .pipe(gulp.dest(config.output))
 }
 
