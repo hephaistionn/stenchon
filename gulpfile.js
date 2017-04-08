@@ -23,7 +23,7 @@ const config = {
     },
     babelifyOptions: {
         presets: ['es2015'],
-        compact: false,
+        compact: true,
         global: true
     }
 };
@@ -35,7 +35,7 @@ function bundle() {
         .on('error', gutil.log)
         .pipe(source('app.js'))
         .pipe(buffer())
-        .pipe(uglify().on('error', gutil.log))
+        .pipe(uglify())
         .pipe(gulp.dest(config.output))
 }
 
