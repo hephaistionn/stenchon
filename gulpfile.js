@@ -23,7 +23,7 @@ const config = {
     },
     babelifyOptions: {
         presets: ['es2015'],
-        compact: false,
+        compact: true,
         global: true
     }
 };
