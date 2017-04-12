@@ -3,6 +3,7 @@ const type = require('./actionType');
 module.exports = {
     hp: 120,
     power:100,
+    level: 4,
     name: 'Marine Serpentard',
     slogan: 'Au nom des sang-pur',
     sound:'assets/start9.wav',

@@ -30,6 +30,20 @@
       opacity: 1;
     }
   }
+
+  .weakness {
+    position: absolute;
+    top: 160px;
+    left: 172px;
+    opacity: 0;
+    transition: opacity 500ms;
+    color: white;
+    font-size: 1.8em;
+    text-shadow: 0 0 3px red;
+    &.show{
+      opacity: 1;
+    }
+  }
 }
 
 .stricken {
@@ -103,5 +117,21 @@
   }
   100% {
     transform: translate(20%, -10%);
+  }
+}
+
+.level {
+  position: absolute;
+  top: 268px;
+  text-shadow: 0 0 2px black;
+  color: white;
+  font-size: 1.5em;
+  right: 0;
+}
+
+.mob {
+  .level {
+    left: 0;
+    right: auto;
   }
 }

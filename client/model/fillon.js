@@ -3,6 +3,7 @@ const type = require('./actionType');
 module.exports = {
     hp: 100,
     power:100,
+    level: 3,
     name: 'Jean François Fripon',
     slogan: 'The White Walker',
     sound:'assets/start10.wav',

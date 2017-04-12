@@ -131,6 +131,7 @@ module.exports = class Manager {
         if(this.entities.length === 1 && this.entities[0].isPlayer) {
             const mobs = modelMobs.timeline[this.level];
             this.level++;
+            this.player.increaseLevel();
             if(mobs && mobs.length) {
                 let modelMob = [];
                 let ctn = 0;

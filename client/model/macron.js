@@ -3,6 +3,7 @@ const type = require('./actionType');
 module.exports = {
     hp: 50,
     power:100,
+    level: 2,
     name: 'Lieutenant Macron',
     slogan: 'Marche ou crève',
     sound:'assets/start8.wav',

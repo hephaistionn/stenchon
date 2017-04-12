@@ -54,6 +54,7 @@ module.exports = class Mob {
         this.selectable = false;
         this.disabled = false;
         this.soundDead = model.soundDead;
+        this.level = model.level;
         this.name = model.name;
 
         this.waiting();
@@ -65,10 +66,18 @@ module.exports = class Mob {
         const nameUI = new Name(this.name);
         this.dom.appendChild(nameUI.dom);
 
-        this.damage = document.createElement('div');
-        this.damage.className = 'damage';
-        this.dom.appendChild(this.damage);
+        this.labelDamage = document.createElement('div');
+        this.labelDamage.className = 'damage';
+        this.dom.appendChild(this.labelDamage);
 
+        this.labelWeakness = document.createElement('div');
+        this.labelWeakness.className = 'weakness';
+        this.dom.appendChild(this.labelWeakness);
+
+        this.labelLevel = document.createElement('div');
+        this.labelLevel.className = 'level';
+        this.labelLevel.textContent = 'N.'+this.level;
+        this.dom.appendChild(this.labelLevel);
 
         this.startAnimationComing();
     }
@@ -93,14 +102,14 @@ module.exports = class Mob {
     }
 
     affected(action) {
-        this.damage.className = 'damage show';
+        this.labelDamage.className = 'damage show';
         if(action.type === type.renforcement) {
-            this.damage.textContent = '+ '+action.damage+'HP';
+            this.labelDamage.textContent = '+ '+action.damage+'HP';
             this.hp += action.damage;
             this.setState(this.states[action.state]);
             this.startAnimationStriken();
         } else if(action.type === type.defense) {
-            this.damage.textContent = 'résistance améliorée';
+            this.labelDamage.textContent = 'résistance améliorée';
             if(!this.weakness.updated)
                 Object.keys(this.weakness).map((objectKey) => {
                     this.weakness[objectKey] = this.weakness[objectKey] - 0.2;
@@ -111,7 +120,11 @@ module.exports = class Mob {
             this.startAnimationStriken();
         } else {
             const factor = this.weakness[type[action.type]];
-            this.damage.textContent = '- '+(factor * action.damage)+'HP';
+            this.labelDamage.textContent = '- '+(factor * action.damage)+'HP';
+            if(factor!==1){
+                this.labelWeakness.className = 'weakness show';
+                this.labelWeakness.textContent = factor > 1 ? 'résistance' : 'faiblesse';
+            }
             this.hp -= factor * action.damage;
             this.hp = Math.max(this.hp, 0);
             this.hpUI.update(this.hp, this.hpMax);
@@ -161,7 +174,8 @@ module.exports = class Mob {
         this.sprite.className = this.sprite.className.replace(' stricken', '');
         this.sprite.className += ' stricken';
         this.timerAnimation = setTimeout(()=> {
-            this.damage.className = 'damage';
+            this.labelDamage.className = 'damage';
+            this.labelWeakness.className = 'weakness';
             this.sprite.className = this.sprite.className.replace(' stricken', '');
         }, 1000)
     }

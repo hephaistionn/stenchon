@@ -3,6 +3,7 @@ const type = require('./actionType');
 module.exports = {
     hp: 40,
     power: 100,
+    level: 1,
     name: 'Dany le Rouge',
     slogan: 'Trotskiste Libéral',
     soundDead:'assets/kill0.wav',

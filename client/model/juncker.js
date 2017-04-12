@@ -1,8 +1,9 @@
 const type = require('./actionType');
 
 module.exports = {
-    hp: 400,
+    hp: 300,
     power:100,
+    level: 7,
     name: 'Dark Juncker',
     slogan: 'Imperator de l\'empire liberal',
     sound:'assets/start6.wav',

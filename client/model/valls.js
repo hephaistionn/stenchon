@@ -3,6 +3,7 @@ const type = require('./actionType');
 module.exports = {
     hp: 100,
     power:100,
+    level: 3,
     name: 'Président Général Valls',
     slogan: 'Rassemblement des pouvoirs, exécutif, législatif et judiciaire',
     soundDead:'assets/kill0.wav',

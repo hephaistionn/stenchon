@@ -36,6 +36,7 @@ module.exports = class Player {
         this.waitingStates = model.waiting;
         this.ready = false;
         this.name = model.name;
+        this.level = model.level;
 
         this.waiting();
         this.atbUI = new ATB(this.recovery, this.recoveryDuration);
@@ -46,15 +47,29 @@ module.exports = class Player {
         this.dom.appendChild(this.menu.dom);
         this.menu.close();
         this.disabled = false;
-        const nameUI = new Name(this.name);
-        this.dom.appendChild(nameUI.dom);
+        this.nameUI = new Name(this.name);
+        this.dom.appendChild( this.nameUI.dom);
 
-        this.damage = document.createElement('div');
-        this.damage.className = 'damage';
-        this.dom.appendChild(this.damage);
+        this.labelDamage = document.createElement('div');
+        this.labelDamage.className = 'damage';
+        this.dom.appendChild(this.labelDamage);
+
+        this.labelWeakness = document.createElement('div');
+        this.labelWeakness.className = 'weakness';
+        this.dom.appendChild(this.labelWeakness);
+
+        this.labelLevel = document.createElement('div');
+        this.labelLevel.className = 'level';
+        this.labelLevel.textContent = 'N.'+this.level;
+        this.dom.appendChild(this.labelLevel);
 
         this.startAnimationComing();
 
+    }
+
+    increaseLevel(){
+        this.level++;
+        this.labelLevel.textContent = 'N.'+this.level;
     }
 
     startAction(currentAction) {
@@ -65,9 +80,9 @@ module.exports = class Player {
     }
 
     affected(action) {
-        this.damage.className = 'damage show';
+        this.labelDamage.className = 'damage show';
         if(action.type === type.renforcement) {
-            this.damage.textContent = '+ '+action.damage+'HP';
+            this.labelDamage.textContent = '+ '+action.damage+'HP';
             this.hp += action.damage;
             this.hp = Math.min(this.hpMax, this.hp);
             this.hpUI.update(this.hp, this.hpMax);
@@ -75,8 +90,12 @@ module.exports = class Player {
             this.startAnimationStriken();
         } else {
             const factor = this.weakness[type[action.type]];
-            this.damage.textContent = '- '+(factor * action.damage)+'HP';
+            this.labelDamage.textContent = '- '+(factor * action.damage)+'HP';
             this.hp -= factor * action.damage;
+            if(factor!==1){
+                this.labelWeakness.className = 'weakness show';
+                this.labelWeakness.textContent = factor > 1 ? 'résistance' : 'faiblesse';
+            }
             this.hp = Math.max(this.hp, 0);
             this.hpUI.update(this.hp, this.hpMax);
             this.startAnimationStriken();
@@ -129,7 +148,8 @@ module.exports = class Player {
         this.sprite.className = this.sprite.className.replace(' stricken', '');
         this.sprite.className += ' stricken';
         this.timerStriken = setTimeout(()=> {
-            this.damage.className = 'damage';
+            this.labelDamage.className = 'damage';
+            this.labelWeakness.className = 'weakness';
             this.sprite.className = this.sprite.className.replace(' stricken', '');
         }, 1000);
     }

@@ -3,6 +3,7 @@ const type = require('./actionType');
 module.exports = {
     hp: 50,
     power:50,
+    level: 2,
     name: 'Benois Pignon',
     slogan: 'Le dîner de cons',
     sound:'assets/start11.wav',

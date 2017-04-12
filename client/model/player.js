@@ -2,6 +2,7 @@ const type = require('./actionType');
 module.exports = {
     hp: 100,
     power: 100,
+    level:0,
     name: 'Mélenchon',
     slogan: 'Can\'t stenchon the Melenchon',
     states: [

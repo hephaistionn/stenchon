@@ -1,8 +1,9 @@
 const type = require('./actionType');
 
 module.exports = {
-    hp: 300,
+    hp: 250,
     power:100,
+    level: 5,
     name: 'Angela',
     slogan: 'L\'Ordre Teutonique Liberal',
     sound:'assets/start5.wav',
