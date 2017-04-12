@@ -1,7 +1,7 @@
 .menu_container {
   position: absolute;
   background: $orange;
-  bottom: 90px;
+  bottom: 120px;
   left: 79%;
   z-index: 1;
   display: none;
@@ -11,8 +11,8 @@
     cursor: pointer;
     height: 36px;
     font-size: 16px;
-    margin: 0px 5px;
-    line-height: 36px;
+    margin: 0 5px;
+    width: 320px;
     border-bottom: solid 2px;
     white-space: nowrap;
     &.focus {
@@ -28,7 +28,18 @@
       display: none;
       position: relative;
       left: -46px;
-      top: -35px;
+    }
+
+    .button_content1{
+      position: absolute;
+      line-height: 36px;
+      left:5px;
+    }
+
+    .button_content2{
+      position: absolute;
+      line-height: 36px;
+      right: 5px;
     }
 
   }

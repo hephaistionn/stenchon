@@ -33,7 +33,7 @@ module.exports = class Mob {
 
         this.initEvents();
         if(model.sound)
-        ee.emit('play1', model.sound);
+            ee.emit('play1', model.sound);
 
         this.currentState = null;
         this.timer = 0;
@@ -76,7 +76,7 @@ module.exports = class Mob {
 
         this.labelLevel = document.createElement('div');
         this.labelLevel.className = 'level';
-        this.labelLevel.textContent = 'N.'+this.level;
+        this.labelLevel.textContent = 'N.' + this.level;
         this.dom.appendChild(this.labelLevel);
 
         this.startAnimationComing();
@@ -104,7 +104,7 @@ module.exports = class Mob {
     affected(action) {
         this.labelDamage.className = 'damage show';
         if(action.type === type.renforcement) {
-            this.labelDamage.textContent = '+ '+action.damage+'HP';
+            this.labelDamage.textContent = '+ ' + action.damage + 'HP';
             this.hp += action.damage;
             this.setState(this.states[action.state]);
             this.startAnimationStriken();
@@ -120,10 +120,10 @@ module.exports = class Mob {
             this.startAnimationStriken();
         } else {
             const factor = this.weakness[type[action.type]];
-            this.labelDamage.textContent = '- '+(factor * action.damage)+'HP';
-            if(factor!==1){
+            this.labelDamage.textContent = '- ' + (factor * action.damage) + 'HP';
+            if(factor !== 1) {
                 this.labelWeakness.className = 'weakness show';
-                this.labelWeakness.textContent = factor > 1 ? 'résistance' : 'faiblesse';
+                this.labelWeakness.textContent = factor < 1 ? 'résistance' : 'faiblesse';
             }
             this.hp -= factor * action.damage;
             this.hp = Math.max(this.hp, 0);

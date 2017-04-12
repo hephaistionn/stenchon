@@ -130,9 +130,9 @@ module.exports = class Manager {
     spawner() {
         if(this.entities.length === 1 && this.entities[0].isPlayer) {
             const mobs = modelMobs.timeline[this.level];
-            this.level++;
-            this.player.increaseLevel();
             if(mobs && mobs.length) {
+                this.level++;
+                this.player.increaseLevel();
                 let modelMob = [];
                 let ctn = 0;
                 mobs.forEach(index => {

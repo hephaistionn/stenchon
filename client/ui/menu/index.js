@@ -12,22 +12,37 @@ module.exports = class Menu {
 
         this.opened = false;
 
-        this.actions = model.actions;
+    }
 
+
+    updateContent(actions) {
+        this.actions = actions;
+        while(this.container.firstChild) {
+            this.container.removeChild(this.container.firstChild);
+        }
         this.actions.forEach(action => {
             const button = document.createElement('div');
             button.className = 'menu_button';
-            button.textContent = action.name + ' '+action.cost+ 'MP' ;
             button.onclick = ()=> {
                 ee.emit('selectAction', action);
             };
+
+            const buttonContent1 = document.createElement('div');
+            buttonContent1.className = 'button_content1';
+            buttonContent1.textContent = action.name;
+            button.appendChild(buttonContent1);
+
+            const buttonContent2 = document.createElement('div');
+            buttonContent2.className = 'button_content2';
+            buttonContent2.textContent = action.cost + 'MP/' + action.damage + 'DEG';
+            button.appendChild(buttonContent2);
 
             button.onmouseover = () => {
                 this.container.childNodes.forEach(node=> {
                     node.className = 'menu_button';
                 });
                 button.className = 'menu_button focus';
-                ee.emit('play1','assets/bip.wav');
+                ee.emit('play1', 'assets/bip.wav');
             };
 
             const pointer = document.createElement('div');
@@ -67,23 +82,23 @@ module.exports = class Menu {
         this.currentfocus = 0;
         this._down = (event)=> {
             if(event.keyCode === 38) {
-                if(this.currentfocus !== 0){
-                    ee.emit('play4','assets/bip.wav');
+                if(this.currentfocus !== 0) {
+                    ee.emit('play4', 'assets/bip.wav');
                 }
                 this.currentfocus--;
                 this.currentfocus = Math.max(0, this.currentfocus);
                 event.preventDefault();
                 this.updateFocus();
             } else if(event.keyCode === 40) {
-                if(this.currentfocus !== this.actions.length - 1){
-                    ee.emit('play4','assets/bip.wav');
+                if(this.currentfocus !== this.actions.length - 1) {
+                    ee.emit('play4', 'assets/bip.wav');
                 }
                 this.currentfocus++;
                 this.currentfocus = Math.min(this.currentfocus, this.actions.length - 1);
                 event.preventDefault();
                 this.updateFocus();
             } else if(event.keyCode === 13 || vent.keyCode === 32) {
-                ee.emit('play4','assets/bip.wav');
+                ee.emit('play4', 'assets/bip.wav');
                 ee.emit('selectAction', this.actions[this.currentfocus]);
                 event.preventDefault();
                 this.updateFocus();

@@ -30,22 +30,26 @@ module.exports = class AudioPlayer {
         ee.on('play1', url=> {
             this.player1.src = url;
             this.player1.play();
+            //this.player1.volume = 0;
         });
         ee.on('play2', (url, loop)=> {
             this.player2.src = url;
             this.player2.loop = loop;
             this.player2.volume = 0.2;
             this.player2.play();
+            //this.player2.volume = 0;
         });
 
         ee.on('play3', url=> {
             this.player3.src = url;
             this.player3.play();
+            //this.player3.volume = 0;
         });
 
         ee.on('play4', url=> {
             this.player4.src = url;
             this.player4.play();
+            //this.player4.volume = 0;
         });
 
     }

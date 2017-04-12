@@ -2,12 +2,12 @@ const type = require('./actionType');
 
 module.exports = {
     hp: 300,
-    power:100,
+    power: 100,
     level: 7,
     name: 'Dark Juncker',
     slogan: 'Imperator de l\'empire liberal',
-    sound:'assets/start6.wav',
-    soundDead:'assets/fatal.wav',
+    sound: 'assets/start6.wav',
+    soundDead: 'assets/fatal.wav',
     states: [
         {
             name: 'wait',
@@ -48,7 +48,7 @@ module.exports = {
             state: 2,
             probability: 0.90,
             duration: 3000,
-            sound:'assets/kick3.wav'
+            sound: 'assets/kick3.wav'
         },
         {
             name: 'Lobbycratie et influence',
@@ -59,7 +59,7 @@ module.exports = {
             state: 1,
             probability: 0.66,
             duration: 3000,
-            sound:'assets/kick3.wav'
+            sound: 'assets/kick3.wav'
         },
         {
             name: 'Evasion fiscale',
@@ -70,18 +70,18 @@ module.exports = {
             state: 1,
             probability: 0.33,
             duration: 3000,
-            sound:'assets/kick3.wav'
+            sound: 'assets/kick3.wav'
         },
         {
             name: 'Déstabilisation',
-            type: type.personnel,
+            type: type.politique,
             cost: 75,
-            desc: 'Attaque de type personnel',
+            desc: 'Attaque de type politique',
             damage: 15,
             state: 1,
             probability: 0,
             duration: 3000,
-            sound:'assets/start0.wav'
+            sound: 'assets/start0.wav'
         }
     ],
     waiting: [
@@ -90,7 +90,7 @@ module.exports = {
             state: 0
         }
     ],
-    hurted:3,
+    hurted: 3,
     focus: 0,
     start: 0,
     weakness: {
