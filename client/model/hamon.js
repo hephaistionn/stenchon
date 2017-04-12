@@ -2,7 +2,7 @@ const type = require('./actionType');
 
 module.exports = {
     hp: 50,
-    power:50,
+    power:70,
     level: 2,
     name: 'Benois Pignon',
     slogan: 'Le dîner de cons',
@@ -35,7 +35,7 @@ module.exports = {
         {
             name: 'Plagiat',
             type: type.marketing,
-            cost: 45,
+            cost: 30,
             desc: 'Attaque de type marketing',
             damage: 10,
             state: 1,
@@ -46,7 +46,7 @@ module.exports = {
         {
             name: 'Revenu Universel',
             type: type.marketing,
-            cost: 40,
+            cost: 25,
             desc: 'Attaque de type marketing',
             damage: 10,
             state: 1,

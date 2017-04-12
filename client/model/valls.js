@@ -1,7 +1,7 @@
 const type = require('./actionType');
 
 module.exports = {
-    hp: 100,
+    hp: 120,
     power:100,
     level: 3,
     name: 'Président Général Valls',
@@ -43,7 +43,7 @@ module.exports = {
             type: type.politique,
             cost: 80,
             desc: 'Attaque de type politique',
-            damage: 20,
+            damage: 25,
             state: 1,
             probability: 0.8,
             duration: 3000,
@@ -54,7 +54,7 @@ module.exports = {
             type: type.ps,
             cost: 3000,
             desc: 'Attaque de type PS',
-            damage: 22,
+            damage: 30,
             state: 2,
             probability: 0.5,
             duration: 3000,
@@ -65,7 +65,7 @@ module.exports = {
             type: type.politique,
             cost: 70,
             desc: 'Attaque de type politique',
-            damage: 15,
+            damage: 20,
             state: 2,
             probability: 0,
             duration: 3000,

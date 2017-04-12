@@ -1,7 +1,7 @@
 const type = require('./actionType');
 
 module.exports = {
-    hp: 40,
+    hp: 50,
     power: 100,
     level: 1,
     name: 'Dany le Rouge',
@@ -35,9 +35,9 @@ module.exports = {
         {
             name: 'Grosse Colère',
             type: type.personnel,
-            cost: 80,
+            cost: 50,
             desc: 'Attaque de type personnel',
-            damage: 5,
+            damage: 20,
             state: 1,
             probability: 0.4,
             duration: 3000,
@@ -46,9 +46,9 @@ module.exports = {
         {
             name: 'Tutoiement',
             type: type.manipulation,
-            cost: 80,
+            cost: 40,
             desc: 'Attaque de type manipulation',
-            damage: 10,
+            damage: 20,
             state: 1,
             probability: 0,
             duration: 3000,

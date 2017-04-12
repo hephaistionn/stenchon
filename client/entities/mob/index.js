@@ -106,6 +106,7 @@ module.exports = class Mob {
         if(action.type === type.renforcement) {
             this.labelDamage.textContent = '+ ' + action.damage + 'HP';
             this.hp += action.damage;
+            this.hpUI.update(this.hp, this.hpMax);
             this.setState(this.states[action.state]);
             this.startAnimationStriken();
         } else if(action.type === type.defense) {

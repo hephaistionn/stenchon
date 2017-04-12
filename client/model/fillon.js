@@ -58,7 +58,7 @@ module.exports = {
             type: type.renforcement,
             cost: 100,
             desc: 'Régénération' ,
-            damage: 15,
+            damage: 30,
             state: 3,
             probability: 0.8,
             duration: 2000,

@@ -3,7 +3,7 @@ const type = require('./actionType');
 module.exports = {
     hp: 300,
     power: 100,
-    level: 7,
+    level: 10,
     name: 'Dark Juncker',
     slogan: 'Imperator de l\'empire liberal',
     sound: 'assets/start6.wav',

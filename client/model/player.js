@@ -61,7 +61,7 @@ module.exports = {
             name: 'On ne me la fait pas !',
             type: type.conviction,
             desc: 'Attaque de type conviction',
-            damage: 15,
+            damage: 10,
             cost: 33,
             state: 2,
             duration: 3000,
@@ -101,7 +101,7 @@ module.exports = {
             name: 'Punchline',
             type: type.personnel,
             desc: 'Attaque de type lyrique',
-            damage: 30,
+            damage: 20,
             cost: 50,
             state: 4,
             duration: 3000,
@@ -122,7 +122,7 @@ module.exports = {
             name: 'Culture et Géopolitique',
             type: type.politique,
             desc: 'Attaque de type politique',
-            damage: 40,
+            damage: 30,
             cost: 75,
             state: 4,
             duration: 3000,
@@ -142,7 +142,7 @@ module.exports = {
             name: 'Vote utile',
             type: type.marketing,
             desc: 'Attaque de type marketing',
-            damage: 35,
+            damage: 15,
             cost: 50,
             state: 3,
             duration: 3000,
@@ -202,7 +202,7 @@ module.exports = {
     hpByLevel: [
         50,
         50, //combendite
-        60, //Hamon
+        70, //Hamon
         100, //fillon
         110,  //lepen
         120,  //Valls
