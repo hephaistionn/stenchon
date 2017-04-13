@@ -5,6 +5,7 @@ module.exports = class Home {
     constructor(cb) {
         this.dom = document.createElement('div');
         this.dom.className = 'home_background';
+        this.displayed = true;
 
         const container = document.createElement('div');
         container.className = 'home_container';
@@ -41,9 +42,6 @@ module.exports = class Home {
         share.innerHTML = '<div class="fb-share-button" data-href="http://www.stenchon.fr/" data-layout="button" data-size="small" data-mobile-iframe="false"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.stenchon.fr%2F&amp;src=sdkpreparse">Partager</a></div>';
         container.appendChild(share);
 
-
-
-
         const contact = document.createElement('a');
         contact.className = 'contact';
         contact.href="mailto:mgealex@yahoo.com";
@@ -52,11 +50,22 @@ module.exports = class Home {
         container.appendChild(contact);
 
         this._down = (event)=> {
+            if(!this.displayed) return;
             if(event.keyCode === 13) {
                 cb();
             }
         };
         document.addEventListener('keydown', this._down)
+    }
+
+    show(){
+        this.displayed = true;
+        this.dom.style.display = 'block';
+    }
+
+    hide(){
+        this.displayed = false;
+        this.dom.style.display = 'none';
     }
 
     onRemoved() {

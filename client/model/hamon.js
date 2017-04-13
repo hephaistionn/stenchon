@@ -1,7 +1,7 @@
 const type = require('./actionType');
 
 module.exports = {
-    hp: 50,
+    hp: 70,
     power:70,
     level: 2,
     name: 'Benois Pignon',

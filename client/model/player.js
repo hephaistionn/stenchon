@@ -136,6 +136,7 @@ module.exports = {
             cost: 100,
             state: 6,
             duration: 3000,
+            limit:2,
             sound: 'assets/start7.wav'
         },
         {//8
@@ -194,7 +195,7 @@ module.exports = {
         [0, 1, 4], //combendite
         [8, 4, 6], //Hamon
         [2, 4, 6, 7], //fillon
-        [2, 3, 5, 9, 7],  //lepen
+        [2, 3, 5, 9],  //lepen
         [3, 10, 9, 6, 11, 7],  //Valls
         [2, 6, 9, 11, 7], ////Merkel
         [6, 9, 11, 12, 7] ////Juncker

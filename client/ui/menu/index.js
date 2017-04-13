@@ -9,7 +9,7 @@ module.exports = class Menu {
         this.container = document.createElement('div');
         this.container.className = 'menu_container';
         this.dom.appendChild(this.container);
-
+        this.limit = 0;
         this.opened = false;
 
     }
@@ -23,13 +23,35 @@ module.exports = class Menu {
         this.actions.forEach(action => {
             const button = document.createElement('div');
             button.className = 'menu_button';
-            button.onclick = ()=> {
-                ee.emit('selectAction', action);
-            };
+            if(action.limit){
+                button.onclick = ()=> {
+                    if(button.limit > 0){
+                        button.limit--;
+                        button.firstChild.textContent = action.name + ' ('+button.limit+')';
+                        ee.emit('play4', 'assets/bip.wav');
+                        ee.emit('selectAction', action);
+                        if(button.limit ===0){
+                            button.className += ' disabled';
+                        }
+                    }
+                };
+            }else{
+                button.onclick = ()=> {
+                    ee.emit('play4', 'assets/bip.wav');
+                    ee.emit('selectAction', action);
+                };
+            }
 
             const buttonContent1 = document.createElement('div');
             buttonContent1.className = 'button_content1';
-            buttonContent1.textContent = action.name;
+            if(action.limit){
+                button.limit = action.limit;
+                buttonContent1.textContent = action.name + ' ('+action.limit+')';
+            }else{
+                buttonContent1.textContent = action.name;
+            }
+
+
             button.appendChild(buttonContent1);
 
             const buttonContent2 = document.createElement('div');
@@ -39,9 +61,9 @@ module.exports = class Menu {
 
             button.onmouseover = () => {
                 this.container.childNodes.forEach(node=> {
-                    node.className = 'menu_button';
+                    node.className = node.className.replace(' focus', '');
                 });
-                button.className = 'menu_button focus';
+                button.className += ' focus';
                 ee.emit('play1', 'assets/bip.wav');
             };
 
@@ -73,9 +95,9 @@ module.exports = class Menu {
 
     updateFocus() {
         this.container.childNodes.forEach(node=> {
-            node.className = 'menu_button';
+            node.className = node.className.replace(' focus', '');
         });
-        this.container.childNodes[this.currentfocus].className = 'menu_button  focus';
+        this.container.childNodes[this.currentfocus].className += ' focus';
     }
 
     initEvents() {
@@ -97,11 +119,9 @@ module.exports = class Menu {
                 this.currentfocus = Math.min(this.currentfocus, this.actions.length - 1);
                 event.preventDefault();
                 this.updateFocus();
-            } else if(event.keyCode === 13 || vent.keyCode === 32) {
-                ee.emit('play4', 'assets/bip.wav');
-                ee.emit('selectAction', this.actions[this.currentfocus]);
+            } else if(event.keyCode === 13 || event.keyCode === 32) {
                 event.preventDefault();
-                this.updateFocus();
+                this.container.childNodes[this.currentfocus].onclick();
             }
         };
         document.addEventListener('keydown', this._down);

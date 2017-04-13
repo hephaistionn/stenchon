@@ -54,7 +54,7 @@ module.exports = {
             type: type.ps,
             cost: 3000,
             desc: 'Attaque de type PS',
-            damage: 30,
+            damage: 25,
             state: 2,
             probability: 0.5,
             duration: 3000,

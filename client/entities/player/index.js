@@ -70,8 +70,8 @@ module.exports = class Player {
 
     }
 
-    increaseLevel() {
-        this.level++;
+    updateLevel(level) {
+        this.level = level;
         this.labelLevel.textContent = 'N.' + this.level;
         const actions = this.actionByLevel[this.level];
         this.menu.updateContent(actions.map(index=> {

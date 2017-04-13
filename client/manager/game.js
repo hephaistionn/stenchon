@@ -81,7 +81,7 @@ module.exports = class Manager {
             this.twitter.className = 'twitter';
             this.home.container.appendChild(this.twitter);
         }
-        this.home.dom.style.display = 'block';
+        this.home.show();
         ee.emit('play2','assets/music2.mp3', true);
     }
 
@@ -109,7 +109,7 @@ module.exports = class Manager {
         this.busy = false;
         this.currentFocus = 0;
         if(this.home)
-            this.home.dom.style.display = 'none';
+            this.home.hide();
         if(this.decor)
             this.remove(this.decor);
         if(this.action_ui)
@@ -132,7 +132,7 @@ module.exports = class Manager {
             const mobs = modelMobs.timeline[this.level];
             if(mobs && mobs.length) {
                 this.level++;
-                this.player.increaseLevel();
+                this.player.updateLevel(this.level);
                 let modelMob = [];
                 let ctn = 0;
                 mobs.forEach(index => {

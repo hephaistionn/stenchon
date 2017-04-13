@@ -56,7 +56,7 @@ module.exports = {
         {
             name: 'Sondage',
             type: type.marketing,
-            cost: 60,
+            cost: 80,
             desc: 'Attaque de type marketing',
             damage: 20,
             state: 2,
@@ -78,7 +78,7 @@ module.exports = {
         {
             name: 'C\'est notre projet !!!',
             type: type.hysterie,
-            cost: 60,
+            cost: 70,
             desc: 'Attaque de type hysterie',
             damage: 15,
             state: 2,

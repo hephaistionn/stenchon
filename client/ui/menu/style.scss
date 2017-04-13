@@ -21,6 +21,11 @@
         display: block;
       }
     }
+
+    &.disabled{
+      opacity: 0.3;
+    }
+
     &:last-child{
       border: none;
     }
